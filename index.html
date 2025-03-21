@@ -7,3 +7,86 @@
     <h1>Chào mừng bạn đến với website!</h1>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Đồ Chơi - Morizoi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f1e8;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #d9a066;
+            padding: 15px;
+            color: white;
+            font-size: 24px;
+        }
+        .search-bar {
+            margin: 20px auto;
+            width: 80%;
+        }
+        .search-bar input {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .search-bar button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #d9a066;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 20px;
+        }
+        .product {
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .product img {
+            width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>Shop Đồ Chơi - Morizoi</header>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
+        <button onclick="searchProduct()">Tìm</button>
+    </div>
+    <div class="product-grid" id="productGrid">
+        <div class="product">
+            <img src="https://via.placeholder.com/150" alt="Sản phẩm 1">
+            <p>Đồ chơi mẫu 1</p>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/150" alt="Sản phẩm 2">
+            <p>Đồ chơi mẫu 2</p>
+        </div>
+    </div>
+    <script>
+        function searchProduct() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let products = document.querySelectorAll(".product");
+            products.forEach(product => {
+                let name = product.textContent.toLowerCase();
+                product.style.display = name.includes(input) ? "block" : "none";
+            });
+        }
+    </script>
+</body>
+</html>
