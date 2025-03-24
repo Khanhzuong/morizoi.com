@@ -47,10 +47,13 @@
         .cart {
             position: relative;
         }
+        .cart a {
+            text-decoration: none;
+            color: white;
+        }
         .cart-icon {
             font-size: 24px;
             cursor: pointer;
-            color: white;
         }
         .cart-badge {
             position: absolute;
@@ -76,7 +79,7 @@
         .search-bar button {
             padding: 10px;
             font-size: 16px;
-            background-color: #FFCF01;
+            background-color: #FFCF01; /* Vàng tươi */
             color: black;
             border: none;
             cursor: pointer;
@@ -98,36 +101,56 @@
             <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Logo">
         </div>
         <nav>
-            <a href="index.html" onclick="return goToHome(event)">Trang chủ</a>
+            <a href="index.html" onclick="return reloadHome(event)">Trang chủ</a>
             <a href="sanpham.html">Danh mục sản phẩm</a>
-            <a href="khuyenmai.html">Khuyến mãi</a>
-            <a href="lienhe.html">Liên hệ</a>
+            <a href="#">Khuyến mãi</a>
+            <a href="#">Liên hệ</a>
         </nav>
         <div class="cart">
-    <span class="cart-icon">🛒</span>
-    <span class="cart-badge" id="cart-count">0</span>
-</div>
+            <a href="giohang.html">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-badge" id="cart-count">0</span>
+            </a>
+        </div>
     </header>
+
     <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
         <button onclick="searchProduct()">Tìm</button>
     </div>
+
+    <div class="content">
+        <h1>Chào mừng đến với Morizoi!</h1>
+        <p>Chúng tôi chuyên cung cấp các bộ đồ chơi sáng tạo và cà phê rang xay chất lượng.</p>
+    </div>
+
     <script>
+        // Chức năng tìm kiếm
         function searchProduct() {
             alert("Chức năng tìm kiếm sẽ sớm cập nhật!");
         }
 
-        function goToHome(event) {
-            event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+        // Lấy số lượng sản phẩm trong giỏ hàng từ localStorage
+        function getCartCount() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            return cart.reduce((total, item) => total + item.quantity, 0);
+        }
 
-            if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
-                // Nếu đang ở trang chủ, tải lại trang
+        // Cập nhật số hiển thị trên giỏ hàng
+        function updateCartCount() {
+            document.getElementById("cart-count").innerText = getCartCount();
+        }
+
+        // Xử lý reload trang chủ
+        function reloadHome(event) {
+            if (window.location.pathname.includes("index.html")) {
+                event.preventDefault();
                 window.location.reload();
-            } else {
-                // Nếu đang ở trang khác, điều hướng về trang chủ
-                window.location.href = "index.html";
             }
         }
+
+        // Khi tải trang, cập nhật số giỏ hàng
+        document.addEventListener("DOMContentLoaded", updateCartCount);
     </script>
 </body>
 </html>
