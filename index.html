@@ -26,11 +26,6 @@
             height: 50px;
             margin-right: 10px;
         }
-        .logo span {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-        }
         nav {
             display: flex;
             gap: 20px;
@@ -65,30 +60,6 @@
             padding: 3px 6px;
             border-radius: 50%;
         }
-        .search-bar {
-            margin: 20px auto;
-            text-align: center;
-        }
-        .search-bar input {
-            width: 60%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .search-bar button {
-            padding: 10px;
-            font-size: 16px;
-            background-color: #FFCF01; /* Vàng tươi */
-            color: black;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        .search-bar button:hover {
-            background-color: #E6B800;
-        }
         .content {
             text-align: center;
             padding: 50px 20px;
@@ -114,16 +85,7 @@
         </div>
     </header>
 
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
-        <button onclick="searchProduct()">Tìm</button>
-    </div>
     <script>
-        // Chức năng tìm kiếm
-        function searchProduct() {
-            alert("Chức năng tìm kiếm sẽ sớm cập nhật!");
-        }
-
         // Lấy số lượng sản phẩm trong giỏ hàng từ localStorage
         function getCartCount() {
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
