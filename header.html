@@ -8,8 +8,8 @@
         <a href="khuyenmai.html">Khuyến mãi</a>
         <a href="lienhe.html">Liên hệ</a>
     </nav>
-    <div class="search-bar">
-        <input type="text" id="search-global" placeholder="Tìm kiếm sản phẩm...">
+    <div class="search-bar" id="search-bar" style="display: none;">
+        <input type="text" id="search" placeholder="Tìm kiếm sản phẩm..." onkeyup="searchProduct()">
     </div>
     <div class="cart">
         <a href="giohang.html">
@@ -20,26 +20,29 @@
 </header>
 
 <script>
-    // Lấy số lượng sản phẩm trong giỏ hàng từ localStorage
-    function getCartCount() {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        return cart.reduce((total, item) => total + item.quantity, 0);
-    }
-
-    // Cập nhật số hiển thị trên giỏ hàng
-    function updateCartCount() {
-        document.getElementById("cart-count").innerText = getCartCount();
-    }
-
-    // Xử lý reload trang chủ
-    function reloadHome(event) {
-        if (window.location.pathname.includes("index.html")) {
-            event.preventDefault();
-            window.location.reload();
+    // Hiển thị thanh tìm kiếm nếu đang ở trang "Danh mục sản phẩm"
+    document.addEventListener("DOMContentLoaded", function () {
+        if (window.location.pathname.includes("sanpham.html")) {
+            document.getElementById("search-bar").style.display = "block";
         }
+    });
+
+    // Tìm kiếm sản phẩm trong trang danh mục sản phẩm
+    function searchProduct() {
+        let input = document.getElementById("search").value.toLowerCase();
+        let products = document.querySelectorAll(".product");
+
+        products.forEach(product => {
+            let title = product.querySelector("h3").innerText.toLowerCase();
+            product.style.display = title.includes(input) ? "block" : "none";
+        });
     }
 
-    // Khi tải trang, cập nhật số giỏ hàng
+    // Cập nhật số lượng giỏ hàng
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        document.getElementById("cart-count").innerText = cart.reduce((total, item) => total + item.quantity, 0);
+    }
+
     document.addEventListener("DOMContentLoaded", updateCartCount);
 </script>
-
