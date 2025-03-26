@@ -1,1 +1,111 @@
+<header>
+    <div class="logo">
+        <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Logo">
+    </div>
+    <nav>
+        <a href="index.html" onclick="return reloadHome(event)">Trang chủ</a>
+        <a href="sanpham.html">Danh mục sản phẩm</a>
+        <a href="khuyenmai.html">Khuyến mãi</a>
+        <a href="lienhe.html">Liên hệ</a>
+    </nav>
+    <input type="text" id="search-box" placeholder="Tìm kiếm sản phẩm...">
+    <div class="cart">
+        <a href="giohang.html">
+            <span class="cart-icon">🛒</span>
+            <span class="cart-badge" id="cart-count">0</span>
+        </a>
+    </div>
+</header>
 
+<script>
+    function getCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        return cart.reduce((total, item) => total + item.quantity, 0);
+    }
+
+    function updateCartCount() {
+        document.getElementById("cart-count").innerText = getCartCount();
+    }
+
+    function reloadHome(event) {
+        if (window.location.pathname.includes("index.html")) {
+            event.preventDefault();
+            window.location.reload();
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", updateCartCount);
+</script>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFF3C5;
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background-color: #F48EAA;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+    .logo img {
+        height: 50px;
+        margin-right: 10px;
+    }
+    nav {
+        display: flex;
+        gap: 20px;
+    }
+    nav a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    nav a:hover {
+        text-decoration: underline;
+    }
+    #search-box {
+        padding: 5px;
+        font-size: 16px;
+    }
+    .cart {
+        position: relative;
+    }
+    .cart a {
+        text-decoration: none;
+        color: white;
+    }
+    .cart-icon {
+        font-size: 24px;
+        cursor: pointer;
+    }
+    .cart-badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        font-size: 12px;
+        padding: 3px 6px;
+        border-radius: 50%;
+    }
+    @media (max-width: 768px) {
+        header {
+            flex-direction: column;
+            align-items: center;
+        }
+        nav {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+</style>
