@@ -8,7 +8,9 @@
         <a href="khuyenmai.html">Khuyến mãi</a>
         <a href="lienhe.html">Liên hệ</a>
     </nav>
-    <input type="text" id="search-box" placeholder="Tìm kiếm sản phẩm...">
+    <div class="search-bar">
+        <input type="text" id="search-global" placeholder="Tìm kiếm sản phẩm...">
+    </div>
     <div class="cart">
         <a href="giohang.html">
             <span class="cart-icon">🛒</span>
@@ -18,15 +20,18 @@
 </header>
 
 <script>
+    // Lấy số lượng sản phẩm trong giỏ hàng từ localStorage
     function getCartCount() {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
         return cart.reduce((total, item) => total + item.quantity, 0);
     }
 
+    // Cập nhật số hiển thị trên giỏ hàng
     function updateCartCount() {
         document.getElementById("cart-count").innerText = getCartCount();
     }
 
+    // Xử lý reload trang chủ
     function reloadHome(event) {
         if (window.location.pathname.includes("index.html")) {
             event.preventDefault();
@@ -34,78 +39,7 @@
         }
     }
 
+    // Khi tải trang, cập nhật số giỏ hàng
     document.addEventListener("DOMContentLoaded", updateCartCount);
 </script>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #FFF3C5;
-        margin: 0;
-        padding: 0;
-    }
-    header {
-        background-color: #F48EAA;
-        padding: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    .logo {
-        display: flex;
-        align-items: center;
-    }
-    .logo img {
-        height: 50px;
-        margin-right: 10px;
-    }
-    nav {
-        display: flex;
-        gap: 20px;
-    }
-    nav a {
-        text-decoration: none;
-        color: white;
-        font-size: 18px;
-        font-weight: bold;
-    }
-    nav a:hover {
-        text-decoration: underline;
-    }
-    #search-box {
-        padding: 5px;
-        font-size: 16px;
-    }
-    .cart {
-        position: relative;
-    }
-    .cart a {
-        text-decoration: none;
-        color: white;
-    }
-    .cart-icon {
-        font-size: 24px;
-        cursor: pointer;
-    }
-    .cart-badge {
-        position: absolute;
-        top: -5px;
-        right: -10px;
-        background-color: red;
-        color: white;
-        font-size: 12px;
-        padding: 3px 6px;
-        border-radius: 50%;
-    }
-    @media (max-width: 768px) {
-        header {
-            flex-direction: column;
-            align-items: center;
-        }
-        nav {
-            flex-direction: column;
-            text-align: center;
-        }
-    }
-</style>
