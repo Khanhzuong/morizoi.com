@@ -11,6 +11,56 @@
             margin: 0;
             padding: 0;
         }
+        header {
+            background-color: #F48EAA;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-left: 20px; /* Dời logo sang phải */
+        }
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .cart {
+            position: relative;
+        }
+        .cart a {
+            text-decoration: none;
+            color: white;
+        }
+        .cart-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            font-size: 12px;
+            padding: 3px 6px;
+            border-radius: 50%;
+        }
 
         /* Bong bóng liên hệ */
         .contact-bubbles {
@@ -37,30 +87,56 @@
     </style>
 </head>
 <body>
-
-    <!-- Load Header -->
-    <div id="header-placeholder"></div>
+    <header>
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Logo">
+        </div>
+        <nav>
+            <a href="index.html" onclick="return reloadHome(event)">Trang chủ</a>
+            <a href="sanpham.html">Danh mục sản phẩm</a>
+            <a href="#">Khuyến mãi</a>
+            <a href="#">Liên hệ</a>
+        </nav>
+        <div class="cart">
+            <a href="giohang.html">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-badge" id="cart-count">0</span>
+            </a>
+        </div>
+    </header>
 
     <!-- Bong bóng liên hệ -->
     <div class="contact-bubbles">
         <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
         </a>
-        <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
-            <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/messenger.png" alt="Messenger">
-        </a>
+       <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
+    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/messenger.png" alt="Messenger">
+</a>
     </div>
 
     <script>
-        // Load header từ file header.html
-        fetch("header.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("header-placeholder").innerHTML = data;
-            })
-            .catch(error => console.error("Lỗi tải header:", error));
-    </script>
+        // Lấy số lượng sản phẩm trong giỏ hàng từ localStorage
+        function getCartCount() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            return cart.reduce((total, item) => total + item.quantity, 0);
+        }
 
+        // Cập nhật số hiển thị trên giỏ hàng
+        function updateCartCount() {
+            document.getElementById("cart-count").innerText = getCartCount();
+        }
+
+        // Xử lý reload trang chủ
+        function reloadHome(event) {
+            if (window.location.pathname.includes("index.html")) {
+                event.preventDefault();
+                window.location.reload();
+            }
+        }
+
+        // Khi tải trang, cập nhật số giỏ hàng
+        document.addEventListener("DOMContentLoaded", updateCartCount);
+    </script>
 </body>
 </html>
-
