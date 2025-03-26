@@ -61,6 +61,29 @@
             padding: 3px 6px;
             border-radius: 50%;
         }
+
+        /* Bong bóng liên hệ */
+        .contact-bubbles {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .contact-bubbles a img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .contact-bubbles a img:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -81,6 +104,16 @@
             </a>
         </div>
     </header>
+
+    <!-- Bong bóng liên hệ -->
+    <div class="contact-bubbles">
+        <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+        </a>
+        <a href="https://m.me/morizoi.official" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Facebook_Messenger_4_Logo.svg" alt="Messenger">
+        </a>
+    </div>
 
     <script>
         // Lấy số lượng sản phẩm trong giỏ hàng từ localStorage
