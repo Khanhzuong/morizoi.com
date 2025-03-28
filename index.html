@@ -10,7 +10,21 @@
             background-color: #FFF3C5;
             margin: 0;
             padding: 0;
+            position: relative;
         }
+
+        /* Hình nền mờ */
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/sa%20ban.png') center/cover no-repeat;
+            filter: blur(8px); /* Hiệu ứng làm mờ */
+            z-index: -1;
+        }
+
         header {
             background-color: #F48EAA;
             padding: 15px;
@@ -87,6 +101,10 @@
     </style>
 </head>
 <body>
+
+    <!-- Hình nền mờ -->
+    <div class="background-blur"></div>
+
     <header>
         <div class="logo">
             <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Logo">
@@ -111,8 +129,8 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
         </a>
        <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
-    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/messenger.png" alt="Messenger">
-</a>
+            <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/messenger.png" alt="Messenger">
+        </a>
     </div>
 
     <script>
