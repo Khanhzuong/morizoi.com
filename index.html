@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             position: relative;
+            overflow-x: hidden;
         }
 
         /* Hình nền mờ */
@@ -22,7 +23,17 @@
             height: 100%;
             background: url('https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/sa%20ban.png') center/cover no-repeat;
             filter: blur(8px); /* Hiệu ứng làm mờ */
-            z-index: -1;
+            z-index: -2;
+        }
+
+        /* Nhân vật (Mascot) */
+        .mascot {
+            position: fixed;
+            bottom: 0;
+            left: 5%;
+            width: 250px; /* Kích thước cố định */
+            max-width: 20%; /* Giới hạn theo màn hình */
+            z-index: -1; /* Giữ trên nền nhưng dưới header */
         }
 
         header {
@@ -32,39 +43,48 @@
             align-items: center;
             justify-content: space-between;
         }
+
         .logo {
             display: flex;
             align-items: center;
-            margin-left: 20px; /* Dời logo sang phải */
+            margin-left: 20px;
         }
+
         .logo img {
             height: 50px;
             margin-right: 10px;
         }
+
         nav {
             display: flex;
             gap: 20px;
         }
+
         nav a {
             text-decoration: none;
             color: white;
             font-size: 18px;
             font-weight: bold;
         }
+
         nav a:hover {
             text-decoration: underline;
         }
+
         .cart {
             position: relative;
         }
+
         .cart a {
             text-decoration: none;
             color: white;
         }
+
         .cart-icon {
             font-size: 24px;
             cursor: pointer;
         }
+
         .cart-badge {
             position: absolute;
             top: -5px;
@@ -105,6 +125,9 @@
     <!-- Hình nền mờ -->
     <div class="background-blur"></div>
 
+    <!-- Nhân vật (Mascot) -->
+    <img class="mascot" src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/mascot.png" alt="Mascot">
+
     <header>
         <div class="logo">
             <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Logo">
@@ -134,18 +157,15 @@
     </div>
 
     <script>
-        // Lấy số lượng sản phẩm trong giỏ hàng từ localStorage
         function getCartCount() {
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
             return cart.reduce((total, item) => total + item.quantity, 0);
         }
 
-        // Cập nhật số hiển thị trên giỏ hàng
         function updateCartCount() {
             document.getElementById("cart-count").innerText = getCartCount();
         }
 
-        // Xử lý reload trang chủ
         function reloadHome(event) {
             if (window.location.pathname.includes("index.html")) {
                 event.preventDefault();
@@ -153,8 +173,8 @@
             }
         }
 
-        // Khi tải trang, cập nhật số giỏ hàng
         document.addEventListener("DOMContentLoaded", updateCartCount);
     </script>
+
 </body>
 </html>
