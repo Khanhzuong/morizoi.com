@@ -7,14 +7,13 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #FFF3C5;
+            background-color: #FFF3C3;
             margin: 0;
             padding: 0;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Hình nền mờ */
         .background-blur {
             position: fixed;
             top: 0;
@@ -22,32 +21,22 @@
             width: 100%;
             height: 100%;
             background: url('https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/sa%20ban.png') center/cover no-repeat;
-            filter: blur(8px); /* Hiệu ứng làm mờ */
+            filter: blur(8px);
             z-index: -2;
         }
 
         header {
-            background-color: #F48EAA;
+            background-color: #F05B89;
             padding: 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            margin-left: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .logo img {
-            height: 50px;
-            margin-right: 10px;
-        }
-
-        nav {
-            display: flex;
-            gap: 20px;
+            height: 60px;
+            margin: 0 20px;
         }
 
         nav a {
@@ -55,38 +44,115 @@
             color: white;
             font-size: 18px;
             font-weight: bold;
+            margin: 0 10px;
+            transition: color 0.3s;
         }
 
         nav a:hover {
-            text-decoration: underline;
-        }
-
-        .cart {
-            position: relative;
-        }
-
-        .cart a {
-            text-decoration: none;
-            color: white;
+            color: #FFC107;
         }
 
         .cart-icon {
             font-size: 24px;
-            cursor: pointer;
+            color: white;
         }
 
         .cart-badge {
             position: absolute;
             top: -5px;
             right: -10px;
-            background-color: red;
+            background-color: #FFC107;
             color: white;
             font-size: 12px;
             padding: 3px 6px;
             border-radius: 50%;
         }
 
-        /* Bong bóng liên hệ */
+        .banner {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.7);
+            margin: 20px;
+            border-radius: 15px;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .banner h1 {
+            color: #2E7D32;
+            font-size: 40px;
+            margin: 0;
+        }
+
+        .banner p {
+            color: #555;
+            font-size: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #F05B89;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #FFC107;
+        }
+
+        .featured-products {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .featured-products h2 {
+            color: #2E7D32;
+            font-size: 30px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            color: #2E7D32;
+            font-size: 18px;
+            margin: 10px 0 5px;
+        }
+
+        .product-card p {
+            color: #555;
+            margin: 0;
+        }
+
         .contact-bubbles {
             position: fixed;
             bottom: 20px;
@@ -97,7 +163,7 @@
             z-index: 1000;
         }
 
-        .contact-bubbles a img {
+        .contact-bubbles img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -105,24 +171,37 @@
             transition: transform 0.2s ease-in-out;
         }
 
-        .contact-bubbles a img:hover {
+        .contact-bubbles img:hover {
             transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .banner h1 {
+                font-size: 30px;
+            }
+
+            .banner p {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
-
-    <!-- Hình nền mờ -->
     <div class="background-blur"></div>
     <header>
         <div class="logo">
-            <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Logo">
+            <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Morizoi Logo">
         </div>
         <nav>
             <a href="index.html" onclick="return reloadHome(event)">Trang chủ</a>
             <a href="sanpham.html">Danh mục sản phẩm</a>
-            <a href="#">Khuyến mãi</a>
-            <a href="#">Liên hệ</a>
+            <a href="khuyenmai.html">Khuyến mãi</a>
+            <a href="lienhe.html">Liên hệ</a>
         </nav>
         <div class="cart">
             <a href="giohang.html">
@@ -132,12 +211,34 @@
         </div>
     </header>
 
-    <!-- Bong bóng liên hệ -->
+    <main>
+        <section class="banner">
+            <h1>Chào mừng đến với Morizoi!</h1>
+            <p>Khám phá thế giới đồ chơi đáng yêu cho bé và gia đình.</p>
+            <a href="sanpham.html" class="btn">Xem sản phẩm</a>
+        </section>
+        <section class="featured-products">
+            <h2>Sản phẩm nổi bật</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="placeholder.jpg" alt="Sản phẩm 1">
+                    <h3>Nhà thỏ Morizoi</h3>
+                    <p>500,000 VNĐ</p>
+                </div>
+                <div class="product-card">
+                    <img src="placeholder.jpg" alt="Sản phẩm 2">
+                    <h3>Gia đình gấu Morizoi</h3>
+                    <p>750,000 VNĐ</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <div class="contact-bubbles">
         <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
         </a>
-       <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
+        <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
             <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/messenger.png" alt="Messenger">
         </a>
     </div>
@@ -161,6 +262,5 @@
 
         document.addEventListener("DOMContentLoaded", updateCartCount);
     </script>
-
 </body>
 </html>
