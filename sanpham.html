@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh mục sản phẩm - Morizoi</title>
-    <!-- Thêm favicon -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -228,31 +228,136 @@
             background-color: #2E7D32;
         }
 
+        /* Modal chọn số lượng */
+        .quantity-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quantity-modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .quantity-modal-content h3 {
+            color: #2E7D32;
+            font-size: 20px;
+            margin: 0 0 10px;
+        }
+
+        .quantity-modal-content .price {
+            color: #F05B89;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .quantity-modal-content .price-old {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .quantity-selector button {
+            background-color: #F05B89;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .quantity-selector button:hover {
+            background-color: #2E7D32;
+        }
+
+        .quantity-modal-content .confirm-btn {
+            background-color: #F05B89;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .quantity-modal-content .confirm-btn:hover {
+            background-color: #2E7D32;
+        }
+
+        /* Thanh tìm kiếm */
+        .search-bar {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 300px;
+            max-width: 90%;
+            border: 2px solid #FFD1DC;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .products {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .products h2 {
+            color: #2E7D32;
+            font-size: 32px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
+            gap: 20px;
             padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .product-card {
             background: white;
+            border: 2px solid #FFD1DC;
             border-radius: 15px;
             padding: 15px;
-            border: 2px solid #FFD1DC;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .product-card:hover {
-            transform: scale(1.05);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
         }
 
         .product-card img {
             max-width: 100%;
             border-radius: 8px;
+            height: 150px;
+            object-fit: contain;
         }
 
         .product-card h3 {
@@ -262,8 +367,25 @@
         }
 
         .product-card p {
-            color: #555;
-            margin: 0;
+            color: #F05B89;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .product-card .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #F05B89;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .product-card .btn:hover {
+            background-color: #2E7D32;
         }
 
         footer {
@@ -471,20 +593,118 @@
         </div>
     </div>
 
+    <!-- Modal chọn số lượng -->
+    <div class="quantity-modal" id="quantity-modal">
+        <div class="quantity-modal-content">
+            <span class="close-btn" onclick="closeQuantityModal()">×</span>
+            <h3 id="quantity-modal-title"></h3>
+            <p><span class="price" id="quantity-modal-price"></span> <span class="price-old" id="quantity-modal-price-old"></span></p>
+            <div class="quantity-selector">
+                <button onclick="changeQuantity(-1)">-</button>
+                <span id="quantity-value">1</span>
+                <button onclick="changeQuantity(1)">+</button>
+            </div>
+            <button class="confirm-btn" onclick="confirmAddToCart()">Thêm vào giỏ hàng</button>
+        </div>
+    </div>
+
     <main>
         <section class="products">
-            <h2 style="text-align: center; color: #2E7D32;">Danh mục sản phẩm</h2>
-            <div class="product-grid">
-                <a href="#" class="product-card">
+            <h2>Danh mục sản phẩm</h2>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm..." onkeyup="searchProducts()">
+            </div>
+            <div class="product-grid" id="product-grid">
+                <div class="product-card" data-name="Nhà thỏ Morizoi">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 1">
                     <h3>Nhà thỏ Morizoi</h3>
                     <p>500,000 VNĐ</p>
-                </a>
-                <a href="#" class="product-card">
+                    <a href="#" class="btn" onclick="openQuantityModal('Nhà thỏ Morizoi', 500000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Gia đình gấu Morizoi">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 2">
                     <h3>Gia đình gấu Morizoi</h3>
                     <p>750,000 VNĐ</p>
-                </a>
+                    <a href="#" class="btn" onclick="openQuantityModal('Gia đình gấu Morizoi', 750000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Combo gia đình Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 3">
+                    <h3>Combo gia đình Morizoi</h3>
+                    <p>900,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Combo gia đình Morizoi', 900000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Nhà cây Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 4">
+                    <h3>Nhà cây Morizoi</h3>
+                    <p>600,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Nhà cây Morizoi', 600000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Gia đình mèo Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 5">
+                    <h3>Gia đình mèo Morizoi</h3>
+                    <p>800,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Gia đình mèo Morizoi', 800000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Combo nhà và xe Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 6">
+                    <h3>Combo nhà và xe Morizoi</h3>
+                    <p>1,200,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Combo nhà và xe Morizoi', 1200000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Nhà chim Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 7">
+                    <h3>Nhà chim Morizoi</h3>
+                    <p>550,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Nhà chim Morizoi', 550000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Gia đình chó Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 8">
+                    <h3>Gia đình chó Morizoi</h3>
+                    <p>780,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Gia đình chó Morizoi', 780000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Combo nhà và vườn Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 9">
+                    <h3>Combo nhà và vườn Morizoi</h3>
+                    <p>950,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Combo nhà và vườn Morizoi', 950000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Nhà sóc Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 10">
+                    <h3>Nhà sóc Morizoi</h3>
+                    <p>620,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Nhà sóc Morizoi', 620000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Gia đình cáo Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 11">
+                    <h3>Gia đình cáo Morizoi</h3>
+                    <p>820,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Gia đình cáo Morizoi', 820000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Combo nhà và hồ Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 12">
+                    <h3>Combo nhà và hồ Morizoi</h3>
+                    <p>1,300,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Combo nhà và hồ Morizoi', 1300000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Nhà hươu Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 13">
+                    <h3>Nhà hươu Morizoi</h3>
+                    <p>580,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Nhà hươu Morizoi', 580000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Gia đình sư tử Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 14">
+                    <h3>Gia đình sư tử Morizoi</h3>
+                    <p>850,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Gia đình sư tử Morizoi', 850000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
+                <div class="product-card" data-name="Combo nhà và sân chơi Morizoi">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 15">
+                    <h3>Combo nhà và sân chơi Morizoi</h3>
+                    <p>1,400,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="openQuantityModal('Combo nhà và sân chơi Morizoi', 1400000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                </div>
             </div>
         </section>
     </main>
@@ -525,6 +745,9 @@
     </div>
 
     <script>
+        let currentProduct = {};
+        let quantity = 1;
+
         function showSuccessMessage(message) {
             const successMessage = document.getElementById("success-message");
             successMessage.innerText = message;
@@ -601,13 +824,71 @@
             showSuccessMessage("Đăng xuất thành công");
         }
 
+        function getCart() {
+            return JSON.parse(localStorage.getItem("cart")) || [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+
         function getCartCount() {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cart = getCart();
             return cart.reduce((total, item) => total + item.quantity, 0);
         }
 
         function updateCartCount() {
             document.getElementById("cart-count").innerText = getCartCount();
+        }
+
+        function openQuantityModal(name, price, priceOld, image) {
+            currentProduct = { name, price, priceOld, image };
+            quantity = 1;
+
+            document.getElementById("quantity-modal-title").innerText = name;
+            document.getElementById("quantity-modal-price").innerText = `${price.toLocaleString()} VNĐ`;
+            document.getElementById("quantity-modal-price-old").innerText = priceOld ? `${priceOld.toLocaleString()} VNĐ` : '';
+            document.getElementById("quantity-value").innerText = quantity;
+            document.getElementById("quantity-modal").style.display = "flex";
+        }
+
+        function closeQuantityModal() {
+            document.getElementById("quantity-modal").style.display = "none";
+        }
+
+        function changeQuantity(delta) {
+            quantity = Math.max(1, quantity + delta);
+            document.getElementById("quantity-value").innerText = quantity;
+        }
+
+        function confirmAddToCart() {
+            let cart = getCart();
+            let existingItem = cart.find(item => item.name === currentProduct.name);
+
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ name: currentProduct.name, price: currentProduct.price, image: currentProduct.image, quantity: quantity, selected: false });
+            }
+
+            saveCart(cart);
+            updateCartCount();
+            showSuccessMessage(`${currentProduct.name} đã được thêm vào giỏ hàng!`);
+            closeQuantityModal();
+        }
+
+        function searchProducts() {
+            const searchInput = document.getElementById("search-input").value.toLowerCase();
+            const productCards = document.querySelectorAll(".product-card");
+
+            productCards.forEach(card => {
+                const productName = card.getAttribute("data-name").toLowerCase();
+                if (productName.includes(searchInput)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
         }
 
         document.addEventListener("DOMContentLoaded", () => {
