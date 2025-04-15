@@ -135,6 +135,8 @@
             border: 2px solid #FFD1DC;
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
+            text-decoration: none;
+            color: inherit;
         }
 
         .product-card:hover {
@@ -249,6 +251,10 @@
             margin-bottom: 20px;
         }
 
+        .footer-info {
+            text-align: left;
+        }
+
         .footer-info h3, .footer-social h3 {
             color: white;
             font-size: 20px;
@@ -269,28 +275,31 @@
             color: #FFC107;
         }
 
+        .footer-social {
+            text-align: center;
+        }
+
         .social-links {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            flex-direction: row;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 10px;
         }
 
         .social-links a {
             color: white;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: color 0.3s;
+            transition: transform 0.3s;
         }
 
         .social-links a:hover {
-            color: #FFC107;
+            transform: scale(1.1);
         }
 
         .social-links img {
-            width: 24px;
-            height: 24px;
+            width: 30px;
+            height: 30px;
         }
 
         .contact-bubbles {
@@ -343,6 +352,10 @@
                 text-align: center;
             }
 
+            .footer-info {
+                text-align: center;
+            }
+
             .social-links {
                 justify-content: center;
             }
@@ -380,16 +393,16 @@
         <section class="featured-products">
             <h2>Sản phẩm nổi bật</h2>
             <div class="product-grid">
-                <div class="product-card">
+                <a href="sanpham.html" class="product-card">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 1">
-                    <h3>Maru</h3>
-                    <p>100,000 VNĐ</p>
-                </div>
-                <div class="product-card">
+                    <h3>Nhà thỏ Morizoi</h3>
+                    <p>500,000 VNĐ</p>
+                </a>
+                <a href="sanpham.html" class="product-card">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 2">
-                    <h3>Miro</h3>
-                    <p>100,000 VNĐ</p>
-                </div>
+                    <h3>Gia đình gấu Morizoi</h3>
+                    <p>750,000 VNĐ</p>
+                </a>
             </div>
         </section>
 
@@ -426,13 +439,13 @@
                 <h3>Theo dõi chúng tôi</h3>
                 <div class="social-links">
                     <a href="https://www.instagram.com/morizoi.official" target="_blank">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"> Instagram
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
                     </a>
                     <a href="https://www.facebook.com/morizoi.official" target="_blank">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Facebook
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
                     </a>
                     <a href="https://www.tiktok.com/@morizoi.official" target="_blank">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/a/ad/TikTok_Logo.svg" alt="TikTok"> TikTok
+                        <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/tik-tok.png" alt="TikTok">
                     </a>
                 </div>
             </div>
