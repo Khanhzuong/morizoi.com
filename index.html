@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Đồ Chơi - Morizoi</title>
+    <!-- Thêm favicon -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -74,7 +76,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            position: relative; /* Để thông báo hiển thị đúng vị trí */
+            position: relative;
         }
 
         .auth-btn {
@@ -92,7 +94,7 @@
         /* CSS cho thông báo thành công */
         .success-message {
             position: absolute;
-            top: 40px; /* Hiển thị bên dưới auth-btn */
+            top: 40px;
             right: 0;
             background-color: #2E7D32;
             color: white;
@@ -200,6 +202,31 @@
         }
 
         .auth-form button:hover {
+            background-color: #2E7D32;
+        }
+
+        .logout-content {
+            text-align: center;
+        }
+
+        .logout-content p {
+            color: #2E7D32;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .logout-content button {
+            background-color: #F05B89;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .logout-content button:hover {
             background-color: #2E7D32;
         }
 
@@ -513,6 +540,15 @@
                 font-size: 12px;
                 padding: 6px 10px;
             }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                flex: none;
+                width: 33.33%;
+            }
         }
     </style>
 </head>
@@ -538,18 +574,18 @@
                     <span class="cart-badge" id="cart-count">0</span>
                 </a>
             </div>
-            <!-- Thông báo thành công -->
             <div class="success-message" id="success-message"></div>
         </div>
     </header>
 
-    <!-- Modal đăng nhập/đăng ký -->
+    <!-- Modal đăng nhập/đăng ký/đăng xuất -->
     <div class="modal" id="auth-modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">×</span>
             <div class="tabs">
                 <div class="tab active" onclick="showTab('login')">Đăng nhập</div>
                 <div class="tab" onclick="showTab('register')">Đăng ký</div>
+                <div class="tab" id="logout-tab" style="display: none;" onclick="showTab('logout')">Đăng xuất</div>
             </div>
             <div class="tab-content active" id="login">
                 <form class="auth-form" onsubmit="login(event)">
@@ -568,6 +604,12 @@
                     <input type="password" id="register-password" required>
                     <button type="submit">Đăng ký</button>
                 </form>
+            </div>
+            <div class="tab-content" id="logout">
+                <div class="logout-content">
+                    <p>Bạn có muốn đăng xuất khỏi tài khoản?</p>
+                    <button onclick="logout()">Đăng xuất</button>
+                </div>
             </div>
         </div>
     </div>
@@ -657,17 +699,25 @@
             successMessage.classList.add("show");
             setTimeout(() => {
                 successMessage.classList.remove("show");
-            }, 3000); // Ẩn sau 3 giây
+            }, 3000);
         }
 
-        // Script cho modal đăng nhập/đăng ký
+        // Script cho modal đăng nhập/đăng ký/đăng xuất
         function openModal() {
+            const loggedInUser = localStorage.getItem("loggedInUser");
+            const logoutTab = document.getElementById("logout-tab");
+            if (loggedInUser) {
+                logoutTab.style.display = "block";
+            } else {
+                logoutTab.style.display = "none";
+            }
             document.getElementById("auth-modal").style.display = "flex";
+            showTab("login");
         }
 
         function closeModal() {
             document.getElementById("auth-modal").style.display = "none";
-            showTab("login"); // Mặc định hiển thị tab đăng nhập khi mở lại
+            showTab("login");
         }
 
         function showTab(tabName) {
@@ -682,7 +732,6 @@
             const identifier = document.getElementById("register-identifier").value;
             const password = document.getElementById("register-password").value;
 
-            // Lưu thông tin đăng ký vào localStorage
             let users = JSON.parse(localStorage.getItem("users")) || [];
             if (users.some(user => user.identifier === identifier)) {
                 alert("Email hoặc số điện thoại đã được đăng ký!");
@@ -691,8 +740,7 @@
 
             users.push({ identifier, password });
             localStorage.setItem("users", JSON.stringify(users));
-            alert("Đăng ký thành công! Vui lòng đăng nhập.");
-            showSuccessMessage("Đăng ký thành công"); // Hiển thị thông báo
+            showSuccessMessage("Đăng ký thành công");
             showTab("login");
         }
 
@@ -701,7 +749,6 @@
             const identifier = document.getElementById("login-identifier").value;
             const password = document.getElementById("login-password").value;
 
-            // Kiểm tra thông tin đăng nhập
             let users = JSON.parse(localStorage.getItem("users")) || [];
             const user = users.find(user => user.identifier === identifier && user.password === password);
 
@@ -709,10 +756,18 @@
                 closeModal();
                 localStorage.setItem("loggedInUser", identifier);
                 document.querySelector(".auth-btn").innerText = `Xin chào, ${identifier}`;
-                showSuccessMessage("Đăng nhập thành công"); // Hiển thị thông báo
+                showSuccessMessage("Đăng nhập thành công");
             } else {
                 alert("Email/Số điện thoại hoặc mật khẩu không đúng!");
             }
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            document.querySelector(".auth-btn").innerText = "Đăng nhập/Đăng ký";
+            document.getElementById("logout-tab").style.display = "none";
+            closeModal();
+            showSuccessMessage("Đăng xuất thành công");
         }
 
         // Script cho giỏ hàng
