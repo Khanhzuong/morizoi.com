@@ -69,6 +69,140 @@
             border-radius: 50%;
         }
 
+        /* CSS cho phần đăng nhập/đăng ký */
+        .auth-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative; /* Để thông báo hiển thị đúng vị trí */
+        }
+
+        .auth-btn {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .auth-btn:hover {
+            color: #FFC107;
+        }
+
+        /* CSS cho thông báo thành công */
+        .success-message {
+            position: absolute;
+            top: 40px; /* Hiển thị bên dưới auth-btn */
+            right: 0;
+            background-color: #2E7D32;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 100;
+        }
+
+        .success-message.show {
+            opacity: 1;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #FFD1DC;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            color: #2E7D32;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .tab.active {
+            background-color: #FFD1DC;
+            color: #F05B89;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .auth-form label {
+            color: #2E7D32;
+            font-size: 16px;
+        }
+
+        .auth-form input {
+            padding: 10px;
+            border: 1px solid #FFD1DC;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .auth-form button {
+            background-color: #F05B89;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .auth-form button:hover {
+            background-color: #2E7D32;
+        }
+
         .banner {
             text-align: center;
             padding: 60px 20px;
@@ -364,6 +498,21 @@
             .social-links {
                 justify-content: center;
             }
+
+            .auth-btn {
+                font-size: 16px;
+            }
+
+            .auth-section {
+                gap: 10px;
+            }
+
+            .success-message {
+                top: 30px;
+                right: 10px;
+                font-size: 12px;
+                padding: 6px 10px;
+            }
         }
     </style>
 </head>
@@ -381,13 +530,47 @@
             <a href="khuyenmai.html">Khuyến mãi</a>
             <a href="lienhe.html">Liên hệ</a>
         </nav>
-        <div class="cart">
-            <a href="giohang.html">
-                <span class="cart-icon">🛒</span>
-                <span class="cart-badge" id="cart-count">0</span>
-            </a>
+        <div class="auth-section">
+            <a href="#" class="auth-btn" onclick="openModal()">Đăng nhập/Đăng ký</a>
+            <div class="cart">
+                <a href="giohang.html">
+                    <span class="cart-icon">🛒</span>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </a>
+            </div>
+            <!-- Thông báo thành công -->
+            <div class="success-message" id="success-message"></div>
         </div>
     </header>
+
+    <!-- Modal đăng nhập/đăng ký -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('login')">Đăng nhập</div>
+                <div class="tab" onclick="showTab('register')">Đăng ký</div>
+            </div>
+            <div class="tab-content active" id="login">
+                <form class="auth-form" onsubmit="login(event)">
+                    <label for="login-identifier">Email hoặc Số điện thoại:</label>
+                    <input type="text" id="login-identifier" required>
+                    <label for="login-password">Mật khẩu:</label>
+                    <input type="password" id="login-password" required>
+                    <button type="submit">Đăng nhập</button>
+                </form>
+            </div>
+            <div class="tab-content" id="register">
+                <form class="auth-form" onsubmit="register(event)">
+                    <label for="register-identifier">Email hoặc Số điện thoại:</label>
+                    <input type="text" id="register-identifier" required>
+                    <label for="register-password">Mật khẩu:</label>
+                    <input type="password" id="register-password" required>
+                    <button type="submit">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <main>
         <section class="banner">
@@ -437,7 +620,7 @@
                 <h3>Liên hệ với Morizoi</h3>
                 <p class="address"><strong>Địa chỉ:</strong> 52 Đặng Thúc Vịnh, huyện Hóc Môn, Thành phố Hồ Chí Minh</p>
                 <p><strong>Website:</strong> <a href="http://www.morizoi.com" target="_blank">www.morizoi.com</a></p>
-                <p><strong.>Email:</strong> <a href="mailto:info@morizoi.com">info@morizoi.com</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@morizoi.com">info@morizoi.com</a></p>
                 <p><strong>Số điện thoại:</strong> <a href="tel:+84937910369">+84 937 910 369</a></p>
             </div>
             <div class="footer-social">
@@ -467,6 +650,72 @@
     </div>
 
     <script>
+        // Hàm hiển thị thông báo thành công
+        function showSuccessMessage(message) {
+            const successMessage = document.getElementById("success-message");
+            successMessage.innerText = message;
+            successMessage.classList.add("show");
+            setTimeout(() => {
+                successMessage.classList.remove("show");
+            }, 3000); // Ẩn sau 3 giây
+        }
+
+        // Script cho modal đăng nhập/đăng ký
+        function openModal() {
+            document.getElementById("auth-modal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("auth-modal").style.display = "none";
+            showTab("login"); // Mặc định hiển thị tab đăng nhập khi mở lại
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+            document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
+            document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add("active");
+            document.getElementById(tabName).classList.add("active");
+        }
+
+        function register(event) {
+            event.preventDefault();
+            const identifier = document.getElementById("register-identifier").value;
+            const password = document.getElementById("register-password").value;
+
+            // Lưu thông tin đăng ký vào localStorage
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            if (users.some(user => user.identifier === identifier)) {
+                alert("Email hoặc số điện thoại đã được đăng ký!");
+                return;
+            }
+
+            users.push({ identifier, password });
+            localStorage.setItem("users", JSON.stringify(users));
+            alert("Đăng ký thành công! Vui lòng đăng nhập.");
+            showSuccessMessage("Đăng ký thành công"); // Hiển thị thông báo
+            showTab("login");
+        }
+
+        function login(event) {
+            event.preventDefault();
+            const identifier = document.getElementById("login-identifier").value;
+            const password = document.getElementById("login-password").value;
+
+            // Kiểm tra thông tin đăng nhập
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            const user = users.find(user => user.identifier === identifier && user.password === password);
+
+            if (user) {
+                closeModal();
+                localStorage.setItem("loggedInUser", identifier);
+                document.querySelector(".auth-btn").innerText = `Xin chào, ${identifier}`;
+                showSuccessMessage("Đăng nhập thành công"); // Hiển thị thông báo
+            } else {
+                alert("Email/Số điện thoại hoặc mật khẩu không đúng!");
+            }
+        }
+
+        // Script cho giỏ hàng
         function getCartCount() {
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
             return cart.reduce((total, item) => total + item.quantity, 0);
@@ -476,7 +725,14 @@
             document.getElementById("cart-count").innerText = getCartCount();
         }
 
-        document.addEventListener("DOMContentLoaded", updateCartCount);
+        // Kiểm tra trạng thái đăng nhập khi tải trang
+        document.addEventListener("DOMContentLoaded", () => {
+            updateCartCount();
+            const loggedInUser = localStorage.getItem("loggedInUser");
+            if (loggedInUser) {
+                document.querySelector(".auth-btn").innerText = `Xin chào, ${loggedInUser}`;
+            }
+        });
     </script>
 </body>
 </html>
