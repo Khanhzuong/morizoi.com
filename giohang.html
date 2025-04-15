@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giỏ hàng - Morizoi</title>
+    <!-- Thêm favicon -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -69,69 +71,191 @@
             border-radius: 50%;
         }
 
-        .cart-section {
-            padding: 30px;
-            max-width: 800px;
-            margin: 0 auto;
+        .auth-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        .auth-btn {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .auth-btn:hover {
+            color: #FFC107;
+        }
+
+        .success-message {
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: #2E7D32;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 100;
+        }
+
+        .success-message.show {
+            opacity: 1;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #FFD1DC;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            color: #2E7D32;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .tab.active {
+            background-color: #FFD1DC;
+            color: #F05B89;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .auth-form label {
+            color: #2E7D32;
+            font-size: 16px;
+        }
+
+        .auth-form input {
+            padding: 10px;
+            border: 1px solid #FFD1DC;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .auth-form button {
+            background-color: #F05B89;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .auth-form button:hover {
+            background-color: #2E7D32;
+        }
+
+        .logout-content {
             text-align: center;
         }
 
-        .cart-section h2 {
+        .logout-content p {
             color: #2E7D32;
-            font-size: 32px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .logout-content button {
+            background-color: #F05B89;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .logout-content button:hover {
+            background-color: #2E7D32;
         }
 
         .cart-items {
-            background: white;
-            border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .cart-item {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .cart-item:last-child {
-            border-bottom: none;
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: 2px solid #FFD1DC;
         }
 
         .cart-item img {
             width: 80px;
-            height: 80px;
-            border-radius: 8px;
-        }
-
-        .cart-item-details {
-            flex: 1;
-            text-align: left;
-        }
-
-        .cart-item-details h3 {
-            color: #2E7D32;
-            font-size: 18px;
-            margin: 0;
-        }
-
-        .cart-item-details p {
-            color: #555;
-            margin: 5px 0;
-        }
-
-        .cart-item-details input {
-            width: 50px;
-            padding: 5px;
-            border: 1px solid #2E7D32;
             border-radius: 5px;
-            text-align: center;
         }
 
-        .remove-btn {
+        .cart-item p {
+            margin: 0;
+            color: #2E7D32;
+        }
+
+        .cart-item button {
             background-color: #F05B89;
             color: white;
             border: none;
@@ -140,35 +264,7 @@
             cursor: pointer;
         }
 
-        .remove-btn:hover {
-            background-color: #2E7D32;
-        }
-
-        .cart-total {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .cart-total p {
-            color: #2E7D32;
-            font-size: 20px;
-            margin: 0;
-        }
-
-        .checkout-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #F05B89;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-        }
-
-        .checkout-btn:hover {
+        .cart-item button:hover {
             background-color: #2E7D32;
         }
 
@@ -281,6 +377,10 @@
                 text-align: center;
             }
 
+            .cart-item img {
+                margin-bottom: 10px;
+            }
+
             .footer-content {
                 flex-direction: column;
                 text-align: center;
@@ -292,6 +392,30 @@
 
             .social-links {
                 justify-content: center;
+            }
+
+            .auth-btn {
+                font-size: 16px;
+            }
+
+            .auth-section {
+                gap: 10px;
+            }
+
+            .success-message {
+                top: 30px;
+                right: 10px;
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                flex: none;
+                width: 33.33%;
             }
         }
     </style>
@@ -310,24 +434,60 @@
             <a href="khuyenmai.html">Khuyến mãi</a>
             <a href="lienhe.html">Liên hệ</a>
         </nav>
-        <div class="cart">
-            <a href="giohang.html">
-                <span class="cart-icon">🛒</span>
-                <span class="cart-badge" id="cart-count">0</span>
-            </a>
+        <div class="auth-section">
+            <a href="#" class="auth-btn" onclick="openModal()">Đăng nhập/Đăng ký</a>
+            <div class="cart">
+                <a href="giohang.html">
+                    <span class="cart-icon">🛒</span>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </a>
+            </div>
+            <div class="success-message" id="success-message"></div>
         </div>
     </header>
 
+    <!-- Modal đăng nhập/đăng ký/đăng xuất -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('login')">Đăng nhập</div>
+                <div class="tab" onclick="showTab('register')">Đăng ký</div>
+                <div class="tab" id="logout-tab" style="display: none;" onclick="showTab('logout')">Đăng xuất</div>
+            </div>
+            <div class="tab-content active" id="login">
+                <form class="auth-form" onsubmit="login(event)">
+                    <label for="login-identifier">Email hoặc Số điện thoại:</label>
+                    <input type="text" id="login-identifier" required>
+                    <label for="login-password">Mật khẩu:</label>
+                    <input type="password" id="login-password" required>
+                    <button type="submit">Đăng nhập</button>
+                </form>
+            </div>
+            <div class="tab-content" id="register">
+                <form class="auth-form" onsubmit="register(event)">
+                    <label for="register-identifier">Email hoặc Số điện thoại:</label>
+                    <input type="text" id="register-identifier" required>
+                    <label for="register-password">Mật khẩu:</label>
+                    <input type="password" id="register-password" required>
+                    <button type="submit">Đăng ký</button>
+                </form>
+            </div>
+            <div class="tab-content" id="logout">
+                <div class="logout-content">
+                    <p>Bạn có muốn đăng xuất khỏi tài khoản?</p>
+                    <button onclick="logout()">Đăng xuất</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <main>
-        <section class="cart-section">
-            <h2>Giỏ hàng của bạn</h2>
-            <div class="cart-items" id="cart-items">
+        <section class="cart-items">
+            <h2 style="text-align: center; color: #2E7D32;">Giỏ hàng của bạn</h2>
+            <div id="cart-list">
                 <!-- Danh sách sản phẩm trong giỏ hàng sẽ được thêm bằng JavaScript -->
             </div>
-            <div class="cart-total" id="cart-total">
-                <p>Tổng tiền: 0 VNĐ</p>
-            </div>
-            <a href="#" class="checkout-btn" onclick="alert('Chức năng thanh toán đang phát triển!')">Thanh toán</a>
         </section>
     </main>
 
@@ -367,16 +527,84 @@
     </div>
 
     <script>
-        function getCart() {
-            return JSON.parse(localStorage.getItem("cart")) || [];
+        function showSuccessMessage(message) {
+            const successMessage = document.getElementById("success-message");
+            successMessage.innerText = message;
+            successMessage.classList.add("show");
+            setTimeout(() => {
+                successMessage.classList.remove("show");
+            }, 3000);
         }
 
-        function saveCart(cart) {
-            localStorage.setItem("cart", JSON.stringify(cart));
+        function openModal() {
+            const loggedInUser = localStorage.getItem("loggedInUser");
+            const logoutTab = document.getElementById("logout-tab");
+            if (loggedInUser) {
+                logoutTab.style.display = "block";
+            } else {
+                logoutTab.style.display = "none";
+            }
+            document.getElementById("auth-modal").style.display = "flex";
+            showTab("login");
+        }
+
+        function closeModal() {
+            document.getElementById("auth-modal").style.display = "none";
+            showTab("login");
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+            document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
+            document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add("active");
+            document.getElementById(tabName).classList.add("active");
+        }
+
+        function register(event) {
+            event.preventDefault();
+            const identifier = document.getElementById("register-identifier").value;
+            const password = document.getElementById("register-password").value;
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            if (users.some(user => user.identifier === identifier)) {
+                alert("Email hoặc số điện thoại đã được đăng ký!");
+                return;
+            }
+
+            users.push({ identifier, password });
+            localStorage.setItem("users", JSON.stringify(users));
+            showSuccessMessage("Đăng ký thành công");
+            showTab("login");
+        }
+
+        function login(event) {
+            event.preventDefault();
+            const identifier = document.getElementById("login-identifier").value;
+            const password = document.getElementById("login-password").value;
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            const user = users.find(user => user.identifier === identifier && user.password === password);
+
+            if (user) {
+                closeModal();
+                localStorage.setItem("loggedInUser", identifier);
+                document.querySelector(".auth-btn").innerText = `Xin chào, ${identifier}`;
+                showSuccessMessage("Đăng nhập thành công");
+            } else {
+                alert("Email/Số điện thoại hoặc mật khẩu không đúng!");
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            document.querySelector(".auth-btn").innerText = "Đăng nhập/Đăng ký";
+            document.getElementById("logout-tab").style.display = "none";
+            closeModal();
+            showSuccessMessage("Đăng xuất thành công");
         }
 
         function getCartCount() {
-            let cart = getCart();
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
             return cart.reduce((total, item) => total + item.quantity, 0);
         }
 
@@ -385,52 +613,29 @@
         }
 
         function renderCart() {
-            let cart = getCart();
-            let cartItems = document.getElementById("cart-items");
-            let cartTotal = document.getElementById("cart-total");
-            cartItems.innerHTML = "";
-
+            const cartList = document.getElementById("cart-list");
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cartList.innerHTML = "";
             if (cart.length === 0) {
-                cartItems.innerHTML = "<p>Giỏ hàng của bạn đang trống!</p>";
-                cartTotal.innerHTML = "<p>Tổng tiền: 0 VNĐ</p>";
+                cartList.innerHTML = "<p style='text-align: center; color: #2E7D32;'>Giỏ hàng trống!</p>";
                 return;
             }
-
-            let total = 0;
             cart.forEach((item, index) => {
-                let itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                cartItems.innerHTML += `
-                    <div class="cart-item">
-                        <img src="${item.image}" alt="${item.name}">
-                        <div class="cart-item-details">
-                            <h3>${item.name}</h3>
-                            <p>${item.price.toLocaleString()} VNĐ</p>
-                            <p>Số lượng: <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)"></p>
-                        </div>
-                        <button class="remove-btn" onclick="removeFromCart(${index})">Xóa</button>
-                    </div>
+                const cartItem = document.createElement("div");
+                cartItem.className = "cart-item";
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <p>${item.name} - ${item.price} VNĐ x ${item.quantity}</p>
+                    <button onclick="removeFromCart(${index})">Xóa</button>
                 `;
+                cartList.appendChild(cartItem);
             });
-
-            cartTotal.innerHTML = `<p>Tổng tiền: ${total.toLocaleString()} VNĐ</p>`;
-        }
-
-        function updateQuantity(index, quantity) {
-            let cart = getCart();
-            cart[index].quantity = parseInt(quantity);
-            if (cart[index].quantity <= 0) {
-                cart.splice(index, 1);
-            }
-            saveCart(cart);
-            updateCartCount();
-            renderCart();
         }
 
         function removeFromCart(index) {
-            let cart = getCart();
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
             cart.splice(index, 1);
-            saveCart(cart);
+            localStorage.setItem("cart", JSON.stringify(cart));
             updateCartCount();
             renderCart();
         }
@@ -438,6 +643,10 @@
         document.addEventListener("DOMContentLoaded", () => {
             updateCartCount();
             renderCart();
+            const loggedInUser = localStorage.getItem("loggedInUser");
+            if (loggedInUser) {
+                document.querySelector(".auth-btn").innerText = `Xin chào, ${loggedInUser}`;
+            }
         });
     </script>
 </body>
