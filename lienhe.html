@@ -1,1 +1,441 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ - Morizoi</title>
+    <!-- Thêm favicon -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #FFF3C3;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
 
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/sa%20ban.png') center/cover no-repeat;
+            filter: blur(8px);
+            z-index: -2;
+        }
+
+        header {
+            background-color: #F05B89;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 60px;
+            margin: 0 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFC107;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: white;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #FFC107;
+            color: white;
+            font-size: 12px;
+            padding: 3px 6px;
+            border-radius: 50%;
+        }
+
+        .auth-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        .auth-btn {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .auth-btn:hover {
+            color: #FFC107;
+        }
+
+        .success-message {
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: #2E7D32;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 100;
+        }
+
+        .success-message.show {
+            opacity: 1;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #FFD1DC;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            color: #2E7D32;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .tab.active {
+            background-color: #FFD1DC;
+            color: #F05B89;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .auth-form label {
+            color: #2E7D32;
+            font-size: 16px;
+        }
+
+        .auth-form input {
+            padding: 10px;
+            border: 1px solid #FFD1DC;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .auth-form button {
+            background-color: #F05B89;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .auth-form button:hover {
+            background-color: #2E7D32;
+        }
+
+        .logout-content {
+            text-align: center;
+        }
+
+        .logout-content p {
+            color: #2E7D32;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .logout-content button {
+            background-color: #F05B89;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .logout-content button:hover {
+            background-color: #2E7D32;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #FFD1DC;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h2 {
+            color: #2E7D32;
+            text-align: center;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form label {
+            color: #2E7D32;
+            font-size: 16px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 10px;
+            border: 1px solid #FFD1DC;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .contact-form button {
+            background-color: #F05B89;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #2E7D32;
+        }
+
+        footer {
+            background-color: #F05B89;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-info, .footer-social {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .footer-info {
+            text-align: left;
+        }
+
+        .footer-info h3, .footer-social h3 {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-info p {
+            margin: 5px 0;
+        }
+
+        .footer-info p.address {
+            white-space: nowrap;
+        }
+
+        .footer-info a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-info a:hover {
+            color: #FFC107;
+        }
+
+        .footer-social {
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .social-links img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .contact-bubbles {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .contact-bubbles img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .contact-bubbles img:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-info {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .auth-btn {
+                font-size: 16px;
+            }
+
+            .auth-section {
+                gap: 10px;
+            }
+
+            .success-message {
+                top: 30px;
+                right: 10px;
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                flex: none;
+                width: 33.33%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-blur"></div>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Morizoi Logo">
+            </a>
+        </div>
+        <nav>
+            <a href="index.html">Trang chủ</a>
+            <a href="sanpham.html">Danh mục sản phẩm</a>
+            <a href="khuyenmai.html">Khuyến mãi</a>
+            <a href="lienhe.html">Liên hệ</a>
+        </nav>
+        <div class="auth-section">
+            <a href="#" class="auth-btn" onclick="openModal()">Đăng nhập/Đăng ký</a>
+            <div class="cart">
+                <a href="giohang.html">
+                    <
