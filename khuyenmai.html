@@ -1,1 +1,542 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khuyến mãi - Morizoi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Comic Neue', cursive;
+            background-color: #FFD1DC;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
 
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/sa%20ban.png') center/cover no-repeat;
+            filter: blur(5px);
+            z-index: -2;
+            opacity: 0.5;
+        }
+
+        header {
+            background-color: #F05B89;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 60px;
+            margin: 0 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFC107;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: white;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #FFC107;
+            color: white;
+            font-size: 12px;
+            padding: 3px 6px;
+            border-radius: 50%;
+        }
+
+        .promo-banner {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            margin: 20px;
+            border-radius: 20px;
+            border: 3px solid #FFD1DC;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .promo-banner h1 {
+            color: #2E7D32;
+            font-size: 40px;
+            margin: 0;
+        }
+
+        .promo-banner p {
+            color: #FF6F91;
+            font-size: 20px;
+            font-style: italic;
+        }
+
+        .promo-banner .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #F05B89;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .promo-banner .btn:hover {
+            background-color: #2E7D32;
+        }
+
+        .countdown {
+            text-align: center;
+            padding: 20px;
+            background: #FFF3C3;
+            margin: 0 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown h3 {
+            color: #2E7D32;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .countdown #timer {
+            font-size: 28px;
+            color: #F05B89;
+            margin-top: 10px;
+        }
+
+        .promotions {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .promotions h2 {
+            color: #2E7D32;
+            font-size: 32px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border: 2px solid #FFD1DC;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            border-radius: 8px;
+            height: 150px;
+            object-fit: contain;
+        }
+
+        .product-card h3 {
+            color: #2E7D32;
+            font-size: 18px;
+            margin: 10px 0 5px;
+        }
+
+        .product-card .price-old {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 14px;
+        }
+
+        .product-card .price-new {
+            color: #F05B89;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .product-card .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #F05B89;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .product-card .btn:hover {
+            background-color: #2E7D32;
+        }
+
+        .promo-info {
+            padding: 20px;
+            text-align: center;
+            background: white;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .promo-info h3 {
+            color: #2E7D32;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .promo-info p {
+            color: #555;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        footer {
+            background-color: #F05B89;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-info, .footer-social {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .footer-info {
+            text-align: left;
+        }
+
+        .footer-info h3, .footer-social h3 {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-info p {
+            margin: 5px 0;
+        }
+
+        .footer-info p.address {
+            white-space: nowrap;
+        }
+
+        .footer-info a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-info a:hover {
+            color: #FFC107;
+        }
+
+        .footer-social {
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .social-links img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .contact-bubbles {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .contact-bubbles img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .contact-bubbles img:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .promo-banner h1 {
+                font-size: 30px;
+            }
+
+            .promo-banner p {
+                font-size: 16px;
+            }
+
+            .countdown #timer {
+                font-size: 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-info {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-blur"></div>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Morizoi Logo">
+            </a>
+        </div>
+        <nav>
+            <a href="index.html">Trang chủ</a>
+            <a href="sanpham.html">Danh mục sản phẩm</a>
+            <a href="khuyenmai.html">Khuyến mãi</a>
+            <a href="lienhe.html">Liên hệ</a>
+        </nav>
+        <div class="cart">
+            <a href="giohang.html">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-badge" id="cart-count">0</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="promo-banner">
+            <h1>Khuyến mãi đặc biệt!</h1>
+            <p>Giảm giá lên đến 20% cho tất cả sản phẩm</p>
+            <a href="#promotions" class="btn">Mua ngay</a>
+        </section>
+
+        <section class="countdown">
+            <h3>Chương trình kết thúc trong</h3>
+            <div id="timer">3 ngày 00:00:00</div>
+        </section>
+
+        <section class="promotions" id="promotions">
+            <h2>Sản phẩm khuyến mãi</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 1">
+                    <h3>Nhà thỏ Morizoi</h3>
+                    <p class="price-old">500,000 VNĐ</p>
+                    <p class="price-new">400,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="addToCart('Nhà thỏ Morizoi', 400000, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Thêm vào giỏ</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 2">
+                    <h3>Gia đình gấu Morizoi</h3>
+                    <p class="price-old">750,000 VNĐ</p>
+                    <p class="price-new">600,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="addToCart('Gia đình gấu Morizoi', 600000, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Thêm vào giỏ</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 3">
+                    <h3>Combo gia đình Morizoi</h3>
+                    <p class="price-old">900,000 VNĐ</p>
+                    <p class="price-new">720,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="addToCart('Combo gia đình Morizoi', 720000, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Thêm vào giỏ</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 4">
+                    <h3>Nhà cây Morizoi</h3>
+                    <p class="price-old">600,000 VNĐ</p>
+                    <p class="price-new">480,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="addToCart('Nhà cây Morizoi', 480000, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Thêm vào giỏ</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 5">
+                    <h3>Gia đình mèo Morizoi</h3>
+                    <p class="price-old">800,000 VNĐ</p>
+                    <p class="price-new">640,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="addToCart('Gia đình mèo Morizoi', 640000, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Thêm vào giỏ</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 6">
+                    <h3>Combo nhà và xe Morizoi</h3>
+                    <p class="price-old">1,200,000 VNĐ</p>
+                    <p class="price-new">960,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="addToCart('Combo nhà và xe Morizoi', 960000, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Thêm vào giỏ</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="promo-info">
+            <h3>Điều kiện khuyến mãi</h3>
+            <p>Áp dụng cho đơn hàng từ 500,000 VNĐ. Chương trình kéo dài đến hết ngày 30/04/2025.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>Liên hệ với Morizoi</h3>
+                <p class="address"><strong>Địa chỉ:</strong> 52 Đặng Thúc Vịnh, huyện Hóc Môn, Thành phố Hồ Chí Minh</p>
+                <p><strong>Website:</strong> <a href="http://www.morizoi.com" target="_blank">www.morizoi.com</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@morizoi.com">info@morizoi.com</a></p>
+                <p><strong>Số điện thoại:</strong> <a href="tel:+84937910369">+84 937 910 369</a></p>
+            </div>
+            <div class="footer-social">
+                <h3>Theo dõi chúng tôi</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/morizoi.official" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.facebook.com/morizoi.official" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+                    </a>
+                    <a href="https://www.tiktok.com/@morizoi.official" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/tik-tok.png" alt="TikTok">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="contact-bubbles">
+        <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+        </a>
+        <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
+            <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/messenger.png" alt="Messenger">
+        </a>
+    </div>
+
+    <script>
+        function getCart() {
+            return JSON.parse(localStorage.getItem("cart")) || [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+
+        function getCartCount() {
+            let cart = getCart();
+            return cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        function updateCartCount() {
+            document.getElementById("cart-count").innerText = getCartCount();
+        }
+
+        function addToCart(name, price, image) {
+            let cart = getCart();
+            let existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, image, quantity: 1 });
+            }
+
+            saveCart(cart);
+            updateCartCount();
+            alert(`${name} đã được thêm vào giỏ hàng!`);
+        }
+
+        // Countdown timer
+        function startTimer() {
+            const endDate = new Date("2025-04-30T23:59:59").getTime();
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = endDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("timer").innerText = `${days} ngày ${hours}:${minutes}:${seconds}`;
+
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.getElementById("timer").innerText = "Chương trình đã kết thúc!";
+                }
+            }, 1000);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateCartCount();
+            startTimer();
+        });
+    </script>
+</body>
+</html>
