@@ -463,4 +463,78 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
                     </a>
                     <a href="https://www.tiktok.com/@morizoi.official" target="_blank">
-                        <img src="https://raw.githubusercontent.com/Khanhzuong
+                        <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/tik-tok.png" alt="TikTok">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="contact-bubbles">
+        <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+        </a>
+        <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
+            <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/messenger.png" alt="Messenger">
+        </a>
+    </div>
+
+    <script>
+        // Script cho đồng hồ đếm ngược
+        const countdownDate = new Date("2025-04-30T00:00:00").getTime();
+
+        const countdownTimer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("timer").innerText = "Khuyến mãi đã bắt đầu!";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerText = `${days} ngày ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }, 1000);
+
+        // Script cho giỏ hàng
+        function getCart() {
+            return JSON.parse(localStorage.getItem("cart")) || [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+
+        function getCartCount() {
+            let cart = getCart();
+            return cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        function updateCartCount() {
+            document.getElementById("cart-count").innerText = getCartCount();
+        }
+
+        function addToCart(name, price, image) {
+            let cart = getCart();
+            let existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, image, quantity: 1 });
+            }
+
+            saveCart(cart);
+            updateCartCount();
+            alert(`${name} đã được thêm vào giỏ hàng!`);
+        }
+
+        document.addEventListener("DOMContentLoaded", updateCartCount);
+    </script>
+</body>
+</html>
