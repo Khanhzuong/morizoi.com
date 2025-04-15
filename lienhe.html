@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liên hệ - Morizoi</title>
-    <!-- Thêm favicon -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -254,7 +254,8 @@
             font-size: 16px;
         }
 
-        .contact-form input, .contact-form textarea {
+        .contact-form input,
+        .contact-form textarea {
             padding: 10px;
             border: 1px solid #FFD1DC;
             border-radius: 5px;
@@ -271,6 +272,10 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
         }
 
         .contact-form button:hover {
@@ -438,4 +443,193 @@
             <a href="#" class="auth-btn" onclick="openModal()">Đăng nhập/Đăng ký</a>
             <div class="cart">
                 <a href="giohang.html">
-                    <
+                    <span class="cart-icon">🛒</span>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </a>
+            </div>
+            <div class="success-message" id="success-message"></div>
+        </div>
+    </header>
+
+    <!-- Modal đăng nhập/đăng ký/đăng xuất -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('login')">Đăng nhập</div>
+                <div class="tab" onclick="showTab('register')">Đăng ký</div>
+                <div class="tab" id="logout-tab" style="display: none;" onclick="showTab('logout')">Đăng xuất</div>
+            </div>
+            <div class="tab-content active" id="login">
+                <form class="auth-form" onsubmit="login(event)">
+                    <label for="login-identifier">Email hoặc Số điện thoại:</label>
+                    <input type="text" id="login-identifier" required>
+                    <label for="login-password">Mật khẩu:</label>
+                    <input type="password" id="login-password" required>
+                    <button type="submit">Đăng nhập</button>
+                </form>
+            </div>
+            <div class="tab-content" id="register">
+                <form class="auth-form" onsubmit="register(event)">
+                    <label for="register-identifier">Email hoặc Số điện thoại:</label>
+                    <input type="text" id="register-identifier" required>
+                    <label for="register-password">Mật khẩu:</label>
+                    <input type="password" id="register-password" required>
+                    <button type="submit">Đăng ký</button>
+                </form>
+            </div>
+            <div class="tab-content" id="logout">
+                <div class="logout-content">
+                    <p>Bạn có muốn đăng xuất khỏi tài khoản?</p>
+                    <button onclick="logout()">Đăng xuất</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section class="contact-form">
+            <h2>Liên hệ với chúng tôi</h2>
+            <form action="https://formsubmit.co/info@morizoi.com" method="POST">
+                <label for="name">Họ và tên:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Tin nhắn:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <button type="submit">📧 Gửi tin nhắn</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>Liên hệ với Morizoi</h3>
+                <p class="address"><strong>Địa chỉ:</strong> 52 Đặng Thúc Vịnh, huyện Hóc Môn, Thành phố Hồ Chí Minh</p>
+                <p><strong>Website:</strong> <a href="http://www.morizoi.com" target="_blank">www.morizoi.com</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@morizoi.com">info@morizoi.com</a></p>
+                <p><strong>Số điện thoại:</strong> <a href="tel:+84937910369">+84 937 910 369</a></p>
+            </div>
+            <div class="footer-social">
+                <h3>Theo dõi chúng tôi</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/morizoi.official" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.facebook.com/morizoi.official" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+                    </a>
+                    <a href="https://www.tiktok.com/@morizoi.official" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/tik-tok.png" alt="TikTok">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="contact-bubbles">
+        <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+        </a>
+        <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
+            <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/messenger.png" alt="Messenger">
+        </a>
+    </div>
+
+    <script>
+        function showSuccessMessage(message) {
+            const successMessage = document.getElementById("success-message");
+            successMessage.innerText = message;
+            successMessage.classList.add("show");
+            setTimeout(() => {
+                successMessage.classList.remove("show");
+            }, 3000);
+        }
+
+        function openModal() {
+            const loggedInUser = localStorage.getItem("loggedInUser");
+            const logoutTab = document.getElementById("logout-tab");
+            if (loggedInUser) {
+                logoutTab.style.display = "block";
+            } else {
+                logoutTab.style.display = "none";
+            }
+            document.getElementById("auth-modal").style.display = "flex";
+            showTab("login");
+        }
+
+        function closeModal() {
+            document.getElementById("auth-modal").style.display = "none";
+            showTab("login");
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+            document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
+            document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add("active");
+            document.getElementById(tabName).classList.add("active");
+        }
+
+        function register(event) {
+            event.preventDefault();
+            const identifier = document.getElementById("register-identifier").value;
+            const password = document.getElementById("register-password").value;
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            if (users.some(user => user.identifier === identifier)) {
+                alert("Email hoặc số điện thoại đã được đăng ký!");
+                return;
+            }
+
+            users.push({ identifier, password });
+            localStorage.setItem("users", JSON.stringify(users));
+            showSuccessMessage("Đăng ký thành công");
+            showTab("login");
+        }
+
+        function login(event) {
+            event.preventDefault();
+            const identifier = document.getElementById("login-identifier").value;
+            const password = document.getElementById("login-password").value;
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            const user = users.find(user => user.identifier === identifier && user.password === password);
+
+            if (user) {
+                closeModal();
+                localStorage.setItem("loggedInUser", identifier);
+                document.querySelector(".auth-btn").innerText = `Xin chào, ${identifier}`;
+                showSuccessMessage("Đăng nhập thành công");
+            } else {
+                alert("Email/Số điện thoại hoặc mật khẩu không đúng!");
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            document.querySelector(".auth-btn").innerText = "Đăng nhập/Đăng ký";
+            document.getElementById("logout-tab").style.display = "none";
+            closeModal();
+            showSuccessMessage("Đăng xuất thành công");
+        }
+
+        function getCartCount() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            return cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        function updateCartCount() {
+            document.getElementById("cart-count").innerText = getCartCount();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateCartCount();
+            const loggedInUser = localStorage.getItem("loggedInUser");
+            if (loggedInUser) {
+                document.querySelector(".auth-btn").innerText = `Xin chào, ${loggedInUser}`;
+            }
+        });
+    </script>
+</body>
+</html>
