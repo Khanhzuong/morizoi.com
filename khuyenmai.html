@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khuyến mãi - Morizoi</title>
-    <!-- Thêm favicon -->
+    <!-- Thêm Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #FFF3C3;
+            background-color: #FFD1DC;
             margin: 0;
             padding: 0;
             position: relative;
@@ -24,8 +24,9 @@
             width: 100%;
             height: 100%;
             background: url('https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/sa%20ban.png') center/cover no-repeat;
-            filter: blur(8px);
+            filter: blur(5px);
             z-index: -2;
+            opacity: 0.5;
         }
 
         header {
@@ -71,186 +72,158 @@
             border-radius: 50%;
         }
 
-        .auth-section {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            position: relative;
+        .promo-banner {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            margin: 20px;
+            border-radius: 20px;
+            border: 3px solid #FFD1DC;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-in-out;
         }
 
-        .auth-btn {
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .promo-banner h1 {
+            color: #2E7D32;
+            font-size: 40px;
+            margin: 0;
+        }
+
+        .promo-banner p {
+            color: #FF6F91;
+            font-size: 20px;
+            font-style: italic;
+        }
+
+        .promo-banner .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #F05B89;
             color: white;
-            font-size: 18px;
-            font-weight: bold;
             text-decoration: none;
-            transition: color 0.3s;
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
         }
 
-        .auth-btn:hover {
-            color: #FFC107;
-        }
-
-        .success-message {
-            position: absolute;
-            top: 40px;
-            right: 0;
+        .promo-banner .btn:hover {
             background-color: #2E7D32;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            z-index: 100;
         }
 
-        .success-message.show {
-            opacity: 1;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: white;
+        .countdown {
+            text-align: center;
             padding: 20px;
+            background: #FFF3C3;
+            margin: 0 20px;
             border-radius: 10px;
-            width: 400px;
-            max-width: 90%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #555;
-        }
-
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #FFD1DC;
-            margin-bottom: 20px;
-        }
-
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-            cursor: pointer;
-            color: #2E7D32;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .tab.active {
-            background-color: #FFD1DC;
-            color: #F05B89;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .auth-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .auth-form label {
-            color: #2E7D32;
-            font-size: 16px;
-        }
-
-        .auth-form input {
-            padding: 10px;
-            border: 1px solid #FFD1DC;
-            border-radius: 5px;
-            font-size: 16px;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .auth-form button {
-            background-color: #F05B89;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .auth-form button:hover {
-            background-color: #2E7D32;
-        }
-
-        .logout-content {
-            text-align: center;
-        }
-
-        .logout-content p {
-            color: #2E7D32;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-
-        .logout-content button {
-            background-color: #F05B89;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .logout-content button:hover {
-            background-color: #2E7D32;
-        }
-
-        .promotions {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .promotion-card {
-            background: white;
-            border-radius: 15px;
-            padding: 15px;
-            margin: 10px auto;
-            max-width: 600px;
-            border: 2px solid #FFD1DC;
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .promotion-card h3 {
+        .countdown h3 {
             color: #2E7D32;
-            font-size: 20px;
-            margin: 0 0 10px;
+            font-size: 24px;
+            margin: 0;
         }
 
-        .promotion-card p {
+        .countdown #timer {
+            font-size: 28px;
+            color: #F05B89;
+            margin-top: 10px;
+        }
+
+        .promotions {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .promotions h2 {
+            color: #2E7D32;
+            font-size: 32px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border: 2px solid #FFD1DC;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            border-radius: 8px;
+            height: 150px;
+            object-fit: contain;
+        }
+
+        .product-card h3 {
+            color: #2E7D32;
+            font-size: 18px;
+            margin: 10px 0 5px;
+        }
+
+        .product-card .price-old {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 14px;
+        }
+
+        .product-card .price-new {
+            color: #F05B89;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .product-card .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #F05B89;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .product-card .btn:hover {
+            background-color: #2E7D32;
+        }
+
+        .promo-info {
+            padding: 20px;
+            text-align: center;
+            background: white;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .promo-info h3 {
+            color: #2E7D32;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .promo-info p {
             color: #555;
+            font-size: 16px;
             margin: 0;
         }
 
@@ -358,6 +331,18 @@
                 gap: 10px;
             }
 
+            .promo-banner h1 {
+                font-size: 30px;
+            }
+
+            .promo-banner p {
+                font-size: 16px;
+            }
+
+            .countdown #timer {
+                font-size: 20px;
+            }
+
             .footer-content {
                 flex-direction: column;
                 text-align: center;
@@ -369,30 +354,6 @@
 
             .social-links {
                 justify-content: center;
-            }
-
-            .auth-btn {
-                font-size: 16px;
-            }
-
-            .auth-section {
-                gap: 10px;
-            }
-
-            .success-message {
-                top: 30px;
-                right: 10px;
-                font-size: 12px;
-                padding: 6px 10px;
-            }
-
-            .tabs {
-                flex-wrap: wrap;
-            }
-
-            .tab {
-                flex: none;
-                width: 33.33%;
             }
         }
     </style>
@@ -411,65 +372,77 @@
             <a href="khuyenmai.html">Khuyến mãi</a>
             <a href="lienhe.html">Liên hệ</a>
         </nav>
-        <div class="auth-section">
-            <a href="#" class="auth-btn" onclick="openModal()">Đăng nhập/Đăng ký</a>
-            <div class="cart">
-                <a href="giohang.html">
-                    <span class="cart-icon">🛒</span>
-                    <span class="cart-badge" id="cart-count">0</span>
-                </a>
-            </div>
-            <div class="success-message" id="success-message"></div>
+        <div class="cart">
+            <a href="giohang.html">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-badge" id="cart-count">0</span>
+            </a>
         </div>
     </header>
 
-    <!-- Modal đăng nhập/đăng ký/đăng xuất -->
-    <div class="modal" id="auth-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">×</span>
-            <div class="tabs">
-                <div class="tab active" onclick="showTab('login')">Đăng nhập</div>
-                <div class="tab" onclick="showTab('register')">Đăng ký</div>
-                <div class="tab" id="logout-tab" style="display: none;" onclick="showTab('logout')">Đăng xuất</div>
-            </div>
-            <div class="tab-content active" id="login">
-                <form class="auth-form" onsubmit="login(event)">
-                    <label for="login-identifier">Email hoặc Số điện thoại:</label>
-                    <input type="text" id="login-identifier" required>
-                    <label for="login-password">Mật khẩu:</label>
-                    <input type="password" id="login-password" required>
-                    <button type="submit">Đăng nhập</button>
-                </form>
-            </div>
-            <div class="tab-content" id="register">
-                <form class="auth-form" onsubmit="register(event)">
-                    <label for="register-identifier">Email hoặc Số điện thoại:</label>
-                    <input type="text" id="register-identifier" required>
-                    <label for="register-password">Mật khẩu:</label>
-                    <input type="password" id="register-password" required>
-                    <button type="submit">Đăng ký</button>
-                </form>
-            </div>
-            <div class="tab-content" id="logout">
-                <div class="logout-content">
-                    <p>Bạn có muốn đăng xuất khỏi tài khoản?</p>
-                    <button onclick="logout()">Đăng xuất</button>
+    <main>
+        <section class="promo-banner">
+            <h1>Khuyến mãi đặc biệt!</h1>
+            <p>Giảm giá lên đến 20% cho tất cả sản phẩm</p>
+            <a href="#promotions" class="btn">Mua ngay</a>
+        </section>
+
+        <section class="countdown">
+            <h3>Áp dụng sau</h3>
+            <div id="timer">15 ngày 00:00:00</div>
+        </section>
+
+        <section class="promotions" id="promotions">
+            <h2>Sản phẩm khuyến mãi</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 1">
+                    <h3>Nhà thỏ Morizoi</h3>
+                    <p class="price-old">500,000 VNĐ</p>
+                    <p class="price-new">400,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="addToCart('Nhà thỏ Morizoi', 400000, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Thêm vào giỏ</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 2">
+                    <h3>Gia đình gấu Morizoi</h3>
+                    <p class="price-old">750,000 VNĐ</p>
+                    <p class="price-new">600,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="addToCart('Gia đình gấu Morizoi', 600000, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Thêm vào giỏ</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 3">
+                    <h3>Combo gia đình Morizoi</h3>
+                    <p class="price-old">900,000 VNĐ</p>
+                    <p class="price-new">720,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="addToCart('Combo gia đình Morizoi', 720000, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Thêm vào giỏ</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 4">
+                    <h3>Nhà cây Morizoi</h3>
+                    <p class="price-old">600,000 VNĐ</p>
+                    <p class="price-new">480,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="addToCart('Nhà cây Morizoi', 480000, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Thêm vào giỏ</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 5">
+                    <h3>Gia đình mèo Morizoi</h3>
+                    <p class="price-old">800,000 VNĐ</p>
+                    <p class="price-new">640,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="addToCart('Gia đình mèo Morizoi', 640000, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Thêm vào giỏ</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 6">
+                    <h3>Combo nhà và xe Morizoi</h3>
+                    <p class="price-old">1,200,000 VNĐ</p>
+                    <p class="price-new">960,000 VNĐ</p>
+                    <a href="#" class="btn" onclick="addToCart('Combo nhà và xe Morizoi', 960000, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Thêm vào giỏ</a>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <main>
-        <section class="promotions">
-            <h2 style="color: #2E7D32;">Khuyến mãi</h2>
-            <div class="promotion-card">
-                <h3>Giảm giá 20% cho đơn hàng đầu tiên</h3>
-                <p>Áp dụng cho tất cả khách hàng đăng ký mới. Hạn sử dụng: 30/04/2025.</p>
-            </div>
-            <div class="promotion-card">
-                <h3>Mua 2 tặng 1</h3>
-                <p>Áp dụng cho các sản phẩm thuộc dòng Morizoi. Hạn sử dụng: 15/05/2025.</p>
-            </div>
+        <section class="promo-info">
+            <h3>Điều kiện khuyến mãi</h3>
+            <p>Áp dụng cho đơn hàng từ 500,000 VNĐ. Chương trình bắt đầu từ ngày 30/04/2025.</p>
         </section>
     </main>
 
@@ -509,84 +482,38 @@
     </div>
 
     <script>
-        function showSuccessMessage(message) {
-            const successMessage = document.getElementById("success-message");
-            successMessage.innerText = message;
-            successMessage.classList.add("show");
-            setTimeout(() => {
-                successMessage.classList.remove("show");
-            }, 3000);
-        }
+        // Script cho đồng hồ đếm ngược
+        const countdownDate = new Date("2025-04-30T00:00:00").getTime();
 
-        function openModal() {
-            const loggedInUser = localStorage.getItem("loggedInUser");
-            const logoutTab = document.getElementById("logout-tab");
-            if (loggedInUser) {
-                logoutTab.style.display = "block";
-            } else {
-                logoutTab.style.display = "none";
-            }
-            document.getElementById("auth-modal").style.display = "flex";
-            showTab("login");
-        }
+        const countdownTimer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
 
-        function closeModal() {
-            document.getElementById("auth-modal").style.display = "none";
-            showTab("login");
-        }
-
-        function showTab(tabName) {
-            document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
-            document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
-            document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add("active");
-            document.getElementById(tabName).classList.add("active");
-        }
-
-        function register(event) {
-            event.preventDefault();
-            const identifier = document.getElementById("register-identifier").value;
-            const password = document.getElementById("register-password").value;
-
-            let users = JSON.parse(localStorage.getItem("users")) || [];
-            if (users.some(user => user.identifier === identifier)) {
-                alert("Email hoặc số điện thoại đã được đăng ký!");
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("timer").innerText = "Khuyến mãi đã bắt đầu!";
                 return;
             }
 
-            users.push({ identifier, password });
-            localStorage.setItem("users", JSON.stringify(users));
-            showSuccessMessage("Đăng ký thành công");
-            showTab("login");
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerText = `${days} ngày ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }, 1000);
+
+        // Script cho giỏ hàng
+        function getCart() {
+            return JSON.parse(localStorage.getItem("cart")) || [];
         }
 
-        function login(event) {
-            event.preventDefault();
-            const identifier = document.getElementById("login-identifier").value;
-            const password = document.getElementById("login-password").value;
-
-            let users = JSON.parse(localStorage.getItem("users")) || [];
-            const user = users.find(user => user.identifier === identifier && user.password === password);
-
-            if (user) {
-                closeModal();
-                localStorage.setItem("loggedInUser", identifier);
-                document.querySelector(".auth-btn").innerText = `Xin chào, ${identifier}`;
-                showSuccessMessage("Đăng nhập thành công");
-            } else {
-                alert("Email/Số điện thoại hoặc mật khẩu không đúng!");
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem("loggedInUser");
-            document.querySelector(".auth-btn").innerText = "Đăng nhập/Đăng ký";
-            document.getElementById("logout-tab").style.display = "none";
-            closeModal();
-            showSuccessMessage("Đăng xuất thành công");
+        function saveCart(cart) {
+            localStorage.setItem("cart", JSON.stringify(cart));
         }
 
         function getCartCount() {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cart = getCart();
             return cart.reduce((total, item) => total + item.quantity, 0);
         }
 
@@ -594,13 +521,22 @@
             document.getElementById("cart-count").innerText = getCartCount();
         }
 
-        document.addEventListener("DOMContentLoaded", () => {
-            updateCartCount();
-            const loggedInUser = localStorage.getItem("loggedInUser");
-            if (loggedInUser) {
-                document.querySelector(".auth-btn").innerText = `Xin chào, ${loggedInUser}`;
+        function addToCart(name, price, image) {
+            let cart = getCart();
+            let existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, image, quantity: 1 });
             }
-        });
+
+            saveCart(cart);
+            updateCartCount();
+            alert(`${name} đã được thêm vào giỏ hàng!`);
+        }
+
+        document.addEventListener("DOMContentLoaded", updateCartCount);
     </script>
 </body>
 </html>
