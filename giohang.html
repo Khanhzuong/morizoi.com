@@ -1,1 +1,441 @@
-hmtl
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng - Morizoi</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FFF3C3;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/sa%20ban.png') center/cover no-repeat;
+            filter: blur(8px);
+            z-index: -2;
+        }
+
+        header {
+            background-color: #F05B89;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 60px;
+            margin: 0 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFC107;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: white;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #FFC107;
+            color: white;
+            font-size: 12px;
+            padding: 3px 6px;
+            border-radius: 50%;
+        }
+
+        .cart-section {
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cart-section h2 {
+            color: #2E7D32;
+            font-size: 32px;
+        }
+
+        .cart-items {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            text-align: left;
+        }
+
+        .cart-item-details h3 {
+            color: #2E7D32;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .cart-item-details p {
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .cart-item-details input {
+            width: 50px;
+            padding: 5px;
+            border: 1px solid #2E7D32;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .remove-btn {
+            background-color: #F05B89;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            background-color: #2E7D32;
+        }
+
+        .cart-total {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .cart-total p {
+            color: #2E7D32;
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .checkout-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #F05B89;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #2E7D32;
+        }
+
+        footer {
+            background-color: #F05B89;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-info, .footer-social {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .footer-info {
+            text-align: left;
+        }
+
+        .footer-info h3, .footer-social h3 {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-info p {
+            margin: 5px 0;
+        }
+
+        .footer-info a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-info a:hover {
+            color: #FFC107;
+        }
+
+        .footer-social {
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .social-links img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .contact-bubbles {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .contact-bubbles img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .contact-bubbles img:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-info {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-blur"></div>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Morizoi Logo">
+            </a>
+        </div>
+        <nav>
+            <a href="index.html">Trang chủ</a>
+            <a href="sanpham.html">Danh mục sản phẩm</a>
+            <a href="khuyenmai.html">Khuyến mãi</a>
+            <a href="lienhe.html">Liên hệ</a>
+        </nav>
+        <div class="cart">
+            <a href="giohang.html">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-badge" id="cart-count">0</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="cart-section">
+            <h2>Giỏ hàng của bạn</h2>
+            <div class="cart-items" id="cart-items">
+                <!-- Danh sách sản phẩm trong giỏ hàng sẽ được thêm bằng JavaScript -->
+            </div>
+            <div class="cart-total" id="cart-total">
+                <p>Tổng tiền: 0 VNĐ</p>
+            </div>
+            <a href="#" class="checkout-btn" onclick="alert('Chức năng thanh toán đang phát triển!')">Thanh toán</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>Liên hệ với Morizoi</h3>
+                <p><strong>Địa chỉ:</strong> 52 Đặng Thúc Vịnh, huyện Hóc Môn, Thành phố Hồ Chí Minh</p>
+                <p><strong>Website:</strong> <a href="http://www.morizoi.com" target="_blank">www.morizoi.com</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@morizoi.com">info@morizoi.com</a></p>
+                <p><strong>Số điện thoại:</strong> <a href="tel:+84937910369">+84 937 910 369</a></p>
+            </div>
+            <div class="footer-social">
+                <h3>Theo dõi chúng tôi</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/morizoi.official" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.facebook.com/morizoi.official" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+                    </a>
+                    <a href="https://www.tiktok.com/@morizoi.official" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/tik-tok.png" alt="TikTok">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="contact-bubbles">
+        <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+        </a>
+        <a href="https://www.facebook.com/morizoi.official?locale=vi_VN" target="_blank">
+            <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/messenger.png" alt="Messenger">
+        </a>
+    </div>
+
+    <script>
+        function getCart() {
+            return JSON.parse(localStorage.getItem("cart")) || [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+
+        function getCartCount() {
+            let cart = getCart();
+            return cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        function updateCartCount() {
+            document.getElementById("cart-count").innerText = getCartCount();
+        }
+
+        function displayCart() {
+            let cart = getCart();
+            let cartItems = document.getElementById("cart-items");
+            let cartTotal = document.getElementById("cart-total");
+            cartItems.innerHTML = "";
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = "<p>Giỏ hàng của bạn đang trống.</p>";
+                cartTotal.innerHTML = "<p>Tổng tiền: 0 VNĐ</p>";
+                return;
+            }
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                let itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                let cartItem = document.createElement("div");
+                cartItem.className = "cart-item";
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <h3>${item.name}</h3>
+                        <p>Đơn giá: ${item.price.toLocaleString()} VNĐ</p>
+                        <p>Số lượng: <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)"></p>
+                        <p>Tổng: ${itemTotal.toLocaleString()} VNĐ</p>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromCart(${index})">Xóa</button>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+
+            cartTotal.innerHTML = `<p>Tổng tiền: ${total.toLocaleString()} VNĐ</p>`;
+        }
+
+        function updateQuantity(index, quantity) {
+            let cart = getCart();
+            cart[index].quantity = parseInt(quantity);
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            saveCart(cart);
+            updateCartCount();
+            displayCart();
+        }
+
+        function removeFromCart(index) {
+            let cart = getCart();
+            cart.splice(index, 1);
+            saveCart(cart);
+            updateCartCount();
+            displayCart();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateCartCount();
+            displayCart();
+        });
+    </script>
+</body>
+</html>
