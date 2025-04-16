@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Đồ Chơi - Morizoi</title>
-    <!-- Thêm favicon -->
+    <title>Trang chủ - Morizoi</title>
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -35,11 +35,17 @@
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         .logo img {
             height: 60px;
             margin: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
         }
 
         nav a {
@@ -53,6 +59,18 @@
 
         nav a:hover {
             color: #FFC107;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .nav-links {
+            display: flex;
         }
 
         .cart-icon {
@@ -71,7 +89,6 @@
             border-radius: 50%;
         }
 
-        /* CSS cho phần đăng nhập/đăng ký */
         .auth-section {
             display: flex;
             align-items: center;
@@ -91,7 +108,6 @@
             color: #FFC107;
         }
 
-        /* CSS cho thông báo thành công */
         .success-message {
             position: absolute;
             top: 40px;
@@ -205,6 +221,45 @@
             background-color: #2E7D32;
         }
 
+        .forgot-password {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .forgot-password a {
+            color: #2E7D32;
+            font-size: 14px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .forgot-password a:hover {
+            color: #F05B89;
+        }
+
+        .back-to-login {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .back-to-login a {
+            color: #2E7D32;
+            font-size: 14px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .back-to-login a:hover {
+            color: #F05B89;
+        }
+
+        .otp-display {
+            color: #F05B89;
+            font-size: 16px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
         .logout-content {
             text-align: center;
         }
@@ -230,7 +285,7 @@
             background-color: #2E7D32;
         }
 
-        .banner {
+        .hero-section {
             text-align: center;
             padding: 60px 20px;
             background: white;
@@ -246,19 +301,19 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        .banner h1 {
+        .hero-section h1 {
             color: #2E7D32;
             font-size: 40px;
             margin: 0;
         }
 
-        .banner p {
+        .hero-section p {
             color: #FF6F91;
             font-size: 20px;
             font-style: italic;
         }
 
-        .btn {
+        .hero-section .btn {
             display: inline-block;
             padding: 12px 25px;
             background-color: #F05B89;
@@ -269,127 +324,57 @@
             transition: background-color 0.3s;
         }
 
-        .btn:hover {
+        .hero-section .btn:hover {
             background-color: #2E7D32;
         }
 
-        .featured-products {
+        .features {
             padding: 30px;
             text-align: center;
         }
 
-        .featured-products h2 {
+        .features h2 {
             color: #2E7D32;
-            font-size: 30px;
+            font-size: 32px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
-        .product-grid {
+        .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
+            gap: 20px;
             padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .product-card {
+        .feature-card {
             background: white;
+            border: 2px solid #FFD1DC;
             border-radius: 15px;
             padding: 15px;
-            border: 2px solid #FFD1DC;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            text-decoration: none;
-            color: inherit;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
         }
 
-        .product-card:hover {
-            transform: scale(1.05);
-        }
-
-        .product-card img {
+        .feature-card img {
             max-width: 100%;
             border-radius: 8px;
+            height: 150px;
+            object-fit: contain;
         }
 
-        .product-card h3 {
+        .feature-card h3 {
             color: #2E7D32;
             font-size: 18px;
             margin: 10px 0 5px;
         }
 
-        .product-card p {
+        .feature-card p {
             color: #555;
-            margin: 0;
-        }
-
-        .commitment {
-            background-color: #FFF3C3;
-            padding: 40px 20px;
-        }
-
-        .commitment-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-        }
-
-        .commitment-image {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-
-        .commitment-image img {
-            max-width: 100%;
-            height: 250px;
-            object-fit: contain;
-        }
-
-        .commitment-text {
-            flex: 2;
-            min-width: 300px;
-            padding: 20px;
-        }
-
-        .commitment-text h2 {
-            color: #2E7D32;
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-
-        .commitment-text p {
-            color: #333;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .commitment-text ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 20px;
-        }
-
-        .commitment-text li {
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .commitment-text li strong {
-            color: #2E7D32;
-        }
-
-        .signature {
-            font-style: italic;
-            color: #F05B89;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-
-        .signature span {
             font-size: 14px;
-            color: #2E7D32;
+            margin: 0 0 10px;
         }
 
         footer {
@@ -491,47 +476,64 @@
         }
 
         @media (max-width: 768px) {
-            nav {
+            .background-blur {
+                filter: blur(12px);
+            }
+
+            .background-blur::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.3);
+                z-index: -1;
+            }
+
+            header {
+                flex-wrap: wrap;
+                padding: 10px;
+            }
+
+            .logo img {
+                height: 50px;
+                margin: 0 10px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
                 flex-direction: column;
-                gap: 10px;
+                width: 100%;
+                background-color: #F05B89;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                padding: 10px 0;
+                z-index: 100;
             }
 
-            .banner h1 {
-                font-size: 30px;
+            .nav-links.active {
+                display: flex;
             }
 
-            .banner p {
+            .nav-links a {
+                margin: 10px 0;
                 font-size: 16px;
-            }
-
-            .commitment-content {
-                flex-direction: column;
                 text-align: center;
-            }
-
-            .commitment-image img {
-                height: 200px;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-info {
-                text-align: center;
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-
-            .auth-btn {
-                font-size: 16px;
             }
 
             .auth-section {
                 gap: 10px;
+                margin-right: 10px;
+            }
+
+            .auth-btn {
+                font-size: 16px;
             }
 
             .success-message {
@@ -548,6 +550,98 @@
             .tab {
                 flex: none;
                 width: 33.33%;
+                font-size: 14px;
+            }
+
+            .hero-section h1 {
+                font-size: 28px;
+            }
+
+            .hero-section p {
+                font-size: 16px;
+            }
+
+            .hero-section .btn {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+
+            .features h2 {
+                font-size: 24px;
+            }
+
+            .feature-card h3 {
+                font-size: 16px;
+            }
+
+            .feature-card p {
+                font-size: 12px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-info {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 40px;
+            }
+
+            .hamburger {
+                font-size: 20px;
+            }
+
+            .auth-btn {
+                font-size: 14px;
+            }
+
+            .cart-icon {
+                font-size: 20px;
+            }
+
+            .cart-badge {
+                font-size: 10px;
+                padding: 2px 5px;
+            }
+
+            .hero-section h1 {
+                font-size: 24px;
+            }
+
+            .hero-section p {
+                font-size: 14px;
+            }
+
+            .hero-section .btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .features h2 {
+                font-size: 20px;
+            }
+
+            .feature-card h3 {
+                font-size: 14px;
+            }
+
+            .feature-card p {
+                font-size: 10px;
+            }
+
+            .contact-bubbles img {
+                width: 40px;
+                height: 40px;
             }
         }
     </style>
@@ -561,10 +655,13 @@
             </a>
         </div>
         <nav>
-            <a href="index.html">Trang chủ</a>
-            <a href="sanpham.html">Danh mục sản phẩm</a>
-            <a href="khuyenmai.html">Khuyến mãi</a>
-            <a href="lienhe.html">Liên hệ</a>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html">Trang chủ</a>
+                <a href="sanpham.html">Danh mục sản phẩm</a>
+                <a href="khuyenmai.html">Khuyến mãi</a>
+                <a href="lienhe.html">Liên hệ</a>
+            </div>
         </nav>
         <div class="auth-section">
             <a href="#" class="auth-btn" onclick="openModal()">Đăng nhập/Đăng ký</a>
@@ -578,13 +675,14 @@
         </div>
     </header>
 
-    <!-- Modal đăng nhập/đăng ký/đăng xuất -->
+    <!-- Modal đăng nhập/đăng ký/đăng xuất/khôi phục mật khẩu -->
     <div class="modal" id="auth-modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">×</span>
             <div class="tabs">
                 <div class="tab active" onclick="showTab('login')">Đăng nhập</div>
                 <div class="tab" onclick="showTab('register')">Đăng ký</div>
+                <div class="tab" id="forgot-password-tab" onclick="showTab('forgot-password')">Khôi phục mật khẩu</div>
                 <div class="tab" id="logout-tab" style="display: none;" onclick="showTab('logout')">Đăng xuất</div>
             </div>
             <div class="tab-content active" id="login">
@@ -593,6 +691,9 @@
                     <input type="text" id="login-identifier" required>
                     <label for="login-password">Mật khẩu:</label>
                     <input type="password" id="login-password" required>
+                    <div class="forgot-password">
+                        <a onclick="showTab('forgot-password')">Quên mật khẩu?</a>
+                    </div>
                     <button type="submit">Đăng nhập</button>
                 </form>
             </div>
@@ -605,6 +706,39 @@
                     <button type="submit">Đăng ký</button>
                 </form>
             </div>
+            <div class="tab-content" id="forgot-password">
+                <form class="auth-form" onsubmit="requestPasswordReset(event)">
+                    <label for="forgot-identifier">Email hoặc Số điện thoại:</label>
+                    <input type="text" id="forgot-identifier" required>
+                    <button type="submit">Gửi yêu cầu khôi phục</button>
+                </form>
+                <div class="back-to-login">
+                    <a onclick="showTab('login')">Quay lại đăng nhập</a>
+                </div>
+            </div>
+            <div class="tab-content" id="verify-otp">
+                <form class="auth-form" onsubmit="verifyOTP(event)">
+                    <label for="otp-code">Nhập mã OTP:</label>
+                    <input type="text" id="otp-code" required>
+                    <div class="otp-display" id="otp-display"></div>
+                    <button type="submit">Xác nhận OTP</button>
+                </form>
+                <div class="back-to-login">
+                    <a onclick="showTab('login')">Quay lại đăng nhập</a>
+                </div>
+            </div>
+            <div class="tab-content" id="reset-password">
+                <form class="auth-form" onsubmit="resetPassword(event)">
+                    <label for="new-password">Mật khẩu mới:</label>
+                    <input type="password" id="new-password" required>
+                    <label for="confirm-password">Xác nhận mật khẩu mới:</label>
+                    <input type="password" id="confirm-password" required>
+                    <button type="submit">Cập nhật mật khẩu</button>
+                </form>
+                <div class="back-to-login">
+                    <a onclick="showTab('login')">Quay lại đăng nhập</a>
+                </div>
+            </div>
             <div class="tab-content" id="logout">
                 <div class="logout-content">
                     <p>Bạn có muốn đăng xuất khỏi tài khoản?</p>
@@ -615,42 +749,29 @@
     </div>
 
     <main>
-        <section class="banner">
+        <section class="hero-section">
             <h1>Chào mừng đến với Morizoi!</h1>
-            <p>Chơi để học, chơi để sáng tạo</p>
+            <p>Đồ chơi để học, chơi để sáng tạo</p>
             <a href="sanpham.html" class="btn">Xem sản phẩm</a>
         </section>
-        <section class="featured-products">
+
+        <section class="features">
             <h2>Sản phẩm nổi bật</h2>
-            <div class="product-grid">
-                <a href="sanpham.html" class="product-card">
+            <div class="feature-grid">
+                <div class="feature-card">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 1">
                     <h3>Nhà thỏ Morizoi</h3>
-                    <p>500,000 VNĐ</p>
-                </a>
-                <a href="sanpham.html" class="product-card">
+                    <p>Đồ chơi mô hình nhà thỏ dễ thương, giúp bé phát triển trí tưởng tượng.</p>
+                </div>
+                <div class="feature-card">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 2">
                     <h3>Gia đình gấu Morizoi</h3>
-                    <p>750,000 VNĐ</p>
-                </a>
-            </div>
-        </section>
-
-        <section class="commitment">
-            <div class="commitment-content">
-                <div class="commitment-image">
-                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/mascot.png" alt="Mascot Morizoi">
+                    <p>Bộ đồ chơi gia đình gấu, phù hợp cho bé từ 3 tuổi trở lên.</p>
                 </div>
-                <div class="commitment-text">
-                    <h2>Cam kết</h2>
-                    <p>Chúng tôi cam kết mang đến cho khách hàng những sản phẩm đồ chơi trẻ em chất lượng cao, an toàn và sáng tạo.</p>
-                    <ul>
-                        <li><strong>Chất lượng đảm bảo</strong> – Sản phẩm được sản xuất từ vật liệu cao cấp, không chứa chất độc hại, đáp ứng các tiêu chuẩn an toàn quốc tế.</li>
-                        <li><strong>Thiết kế độc đáo</strong> – Mô hình Morizoi được thiết kế tỉ mỉ, mang lại trải nghiệm chân thực và sáng tạo cho trẻ em.</li>
-                        <li><strong>Độ bền cao</strong> – Sản phẩm được kiểm định kỹ lưỡng để đảm bảo độ bền và tính thẩm mỹ theo thời gian.</li>
-                        <li><strong>Dịch vụ tận tâm</strong> – Hỗ trợ đổi trả nếu sản phẩm có lỗi từ nhà sản xuất, luôn lắng nghe và phục vụ khách hàng tốt nhất.</li>
-                    </ul>
-                    <p class="signature">Hoang Nguyen<br><span>CEO Founder</span></p>
+                <div class="feature-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 3">
+                    <h3>Combo gia đình Morizoi</h3>
+                    <p>Combo đồ chơi đầy đủ, giúp bé sáng tạo câu chuyện của riêng mình.</p>
                 </div>
             </div>
         </section>
@@ -692,7 +813,14 @@
     </div>
 
     <script>
-        // Hàm hiển thị thông báo thành công
+        let currentIdentifier = '';
+        let currentOTP = '';
+
+        function toggleMenu() {
+            const navLinks = document.getElementById("nav-links");
+            navLinks.classList.toggle("active");
+        }
+
         function showSuccessMessage(message) {
             const successMessage = document.getElementById("success-message");
             successMessage.innerText = message;
@@ -702,7 +830,6 @@
             }, 3000);
         }
 
-        // Script cho modal đăng nhập/đăng ký/đăng xuất
         function openModal() {
             const loggedInUser = localStorage.getItem("loggedInUser");
             const logoutTab = document.getElementById("logout-tab");
@@ -718,6 +845,11 @@
         function closeModal() {
             document.getElementById("auth-modal").style.display = "none";
             showTab("login");
+            document.getElementById("forgot-identifier").value = "";
+            document.getElementById("otp-code").value = "";
+            document.getElementById("new-password").value = "";
+            document.getElementById("confirm-password").value = "";
+            document.getElementById("otp-display").innerText = "";
         }
 
         function showTab(tabName) {
@@ -762,6 +894,63 @@
             }
         }
 
+        function requestPasswordReset(event) {
+            event.preventDefault();
+            const identifier = document.getElementById("forgot-identifier").value;
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            const user = users.find(user => user.identifier === identifier);
+
+            if (!user) {
+                alert("Email hoặc số điện thoại không tồn tại. Vui lòng thử lại.");
+                return;
+            }
+
+            currentIdentifier = identifier;
+            const isEmail = identifier.includes('@');
+
+            if (isEmail) {
+                showSuccessMessage("Một liên kết khôi phục đã được gửi đến email của bạn!");
+                showTab("reset-password");
+            } else {
+                currentOTP = Math.floor(100000 + Math.random() * 900000).toString();
+                document.getElementById("otp-display").innerText = `Mã OTP của bạn: ${currentOTP}`;
+                showTab("verify-otp");
+            }
+        }
+
+        function verifyOTP(event) {
+            event.preventDefault();
+            const otp = document.getElementById("otp-code").value;
+
+            if (otp === currentOTP) {
+                showTab("reset-password");
+            } else {
+                alert("Mã OTP không đúng. Vui lòng thử lại.");
+            }
+        }
+
+        function resetPassword(event) {
+            event.preventDefault();
+            const newPassword = document.getElementById("new-password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+
+            if (newPassword !== confirmPassword) {
+                alert("Mật khẩu không khớp. Vui lòng thử lại.");
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            const userIndex = users.findIndex(user => user.identifier === currentIdentifier);
+            if (userIndex !== -1) {
+                users[userIndex].password = newPassword;
+                localStorage.setItem("users", JSON.stringify(users));
+                showSuccessMessage("Mật khẩu đã được cập nhật thành công!");
+                showTab("login");
+            } else {
+                alert("Đã có lỗi xảy ra. Vui lòng thử lại.");
+            }
+        }
+
         function logout() {
             localStorage.removeItem("loggedInUser");
             document.querySelector(".auth-btn").innerText = "Đăng nhập/Đăng ký";
@@ -770,9 +959,12 @@
             showSuccessMessage("Đăng xuất thành công");
         }
 
-        // Script cho giỏ hàng
+        function getCart() {
+            return JSON.parse(localStorage.getItem("cart")) || [];
+        }
+
         function getCartCount() {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cart = getCart();
             return cart.reduce((total, item) => total + item.quantity, 0);
         }
 
@@ -780,7 +972,6 @@
             document.getElementById("cart-count").innerText = getCartCount();
         }
 
-        // Kiểm tra trạng thái đăng nhập khi tải trang
         document.addEventListener("DOMContentLoaded", () => {
             updateCartCount();
             const loggedInUser = localStorage.getItem("loggedInUser");
