@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ - Morizoi</title>
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Thêm box-sizing toàn cục để tránh lỗi kích thước */
         *, *:before, *:after {
             box-sizing: border-box;
         }
@@ -17,7 +15,7 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            overflow-x: hidden; /* Ngăn kéo ngang */
+            overflow-x: hidden;
         }
 
         body {
@@ -180,9 +178,7 @@
             text-align: center;
             padding: 10px;
             cursor: pointer;
-            color: #
-
-2E7D32;
+            color: #2E7D32;
             font-weight: bold;
             transition: background-color 0.3s;
         }
@@ -211,12 +207,27 @@
             font-size: 16px;
         }
 
+        .auth-form .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
         .auth-form input {
             padding: 10px;
             border: 1px solid #FFD1DC;
             border-radius: 5px;
             font-size: 16px;
             font-family: 'Roboto', sans-serif;
+            width: 100%;
+        }
+
+        .auth-form .toggle-password {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #2E7D32;
         }
 
         .auth-form button {
@@ -302,7 +313,7 @@
             text-align: center;
             padding: 60px 20px;
             background: white;
-            margin: 20px auto; /* Căn giữa */
+            margin: 20px auto;
             border-radius: 20px;
             border: 3px solid #FFD1DC;
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
@@ -393,6 +404,92 @@
             color: #555;
             font-size: 14px;
             margin: 0 0 10px;
+        }
+
+        .commitments {
+            padding: 30px;
+            text-align: center;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .commitments h2 {
+            color: #2E7D32;
+            font-size: 32px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .commitment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .commitment-card {
+            background: white;
+            border: 2px solid #FFD1DC;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .commitment-card:hover {
+            transform: scale(1.05);
+        }
+
+        .commitment-card h3 {
+            color: #2E7D32;
+            font-size: 18px;
+            margin: 10px 0 5px;
+        }
+
+        .commitment-card p {
+            color: #555;
+            font-size: 14px;
+            margin: 0 0 10px;
+        }
+
+        .mascot {
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            background: white;
+            margin: 20px auto;
+            border-radius: 20px;
+            border: 3px solid #FFD1DC;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .mascot img {
+            max-width: 200px;
+            border-radius: 15px;
+        }
+
+        .mascot-text {
+            max-width: 600px;
+        }
+
+        .mascot-text h2 {
+            color: #2E7D32;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .mascot-text p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.5;
         }
 
         footer {
@@ -619,6 +716,49 @@
                 font-size: 12px;
             }
 
+            .commitments {
+                padding: 20px;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .commitments h2 {
+                font-size: 24px;
+            }
+
+            .commitment-grid {
+                padding: 15px;
+                width: 100%;
+            }
+
+            .commitment-card h3 {
+                font-size: 16px;
+            }
+
+            .commitment-card p {
+                font-size: 12px;
+            }
+
+            .mascot {
+                flex-direction: column;
+                padding: 20px;
+                margin: 15px;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .mascot img {
+                max-width: 150px;
+            }
+
+            .mascot-text h2 {
+                font-size: 20px;
+            }
+
+            .mascot-text p {
+                font-size: 14px;
+            }
+
             .footer-content {
                 flex-direction: column;
                 text-align: center;
@@ -626,12 +766,12 @@
             }
 
             .footer-info {
-                text-align: left; /* Căn lề trái trên điện thoại */
-                padding-left: 15px; /* Thêm khoảng cách từ lề trái */
+                text-align: left;
+                padding-left: 15px;
             }
 
             .footer-info p.address {
-                white-space: normal; /* Cho phép xuống dòng để dễ đọc */
+                white-space: normal;
             }
 
             .social-links {
@@ -691,6 +831,30 @@
                 font-size: 10px;
             }
 
+            .commitments h2 {
+                font-size: 20px;
+            }
+
+            .commitment-card h3 {
+                font-size: 14px;
+            }
+
+            .commitment-card p {
+                font-size: 10px;
+            }
+
+            .mascot img {
+                max-width: 120px;
+            }
+
+            .mascot-text h2 {
+                font-size: 18px;
+            }
+
+            .mascot-text p {
+                font-size: 12px;
+            }
+
             .contact-bubbles img {
                 width: 40px;
                 height: 40px;
@@ -731,7 +895,6 @@
         </div>
     </header>
 
-    <!-- Modal đăng nhập/đăng ký/đăng xuất/khôi phục mật khẩu -->
     <div class="modal" id="auth-modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">×</span>
@@ -746,7 +909,10 @@
                     <label for="login-identifier">Email hoặc Số điện thoại:</label>
                     <input type="text" id="login-identifier" required>
                     <label for="login-password">Mật khẩu:</label>
-                    <input type="password" id="login-password" required>
+                    <div class="password-container">
+                        <input type="password" id="login-password" required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility('login-password', this)">👁️</span>
+                    </div>
                     <div class="forgot-password">
                         <a onclick="showTab('forgot-password')">Quên mật khẩu?</a>
                     </div>
@@ -758,7 +924,10 @@
                     <label for="register-identifier">Email hoặc Số điện thoại:</label>
                     <input type="text" id="register-identifier" required>
                     <label for="register-password">Mật khẩu:</label>
-                    <input type="password" id="register-password" required>
+                    <div class="password-container">
+                        <input type="password" id="register-password" required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility('register-password', this)">👁️</span>
+                    </div>
                     <button type="submit">Đăng ký</button>
                 </form>
             </div>
@@ -786,9 +955,15 @@
             <div class="tab-content" id="reset-password">
                 <form class="auth-form" onsubmit="resetPassword(event)">
                     <label for="new-password">Mật khẩu mới:</label>
-                    <input type="password" id="new-password" required>
+                    <div class="password-container">
+                        <input type="password" id="new-password" required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility('new-password', this)">👁️</span>
+                    </div>
                     <label for="confirm-password">Xác nhận mật khẩu mới:</label>
-                    <input type="password" id="confirm-password" required>
+                    <div class="password-container">
+                        <input type="password" id="confirm-password" required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility('confirm-password', this)">👁️</span>
+                    </div>
                     <button type="submit">Cập nhật mật khẩu</button>
                 </form>
                 <div class="back-to-login">
@@ -829,6 +1004,32 @@
                     <h3>Combo gia đình Morizoi</h3>
                     <p>Combo đồ chơi đầy đủ, giúp bé sáng tạo câu chuyện của riêng mình.</p>
                 </div>
+            </div>
+        </section>
+
+        <section class="commitments">
+            <h2>Cam kết của Morizoi</h2>
+            <div class="commitment-grid">
+                <div class="commitment-card">
+                    <h3>Chất lượng cao cấp</h3>
+                    <p>Sản phẩm được làm từ vật liệu an toàn, bền đẹp, đảm bảo chất lượng tốt nhất cho bé.</p>
+                </div>
+                <div class="commitment-card">
+                    <h3>An toàn tuyệt đối</h3>
+                    <p>Tất cả đồ chơi đều được kiểm định an toàn, không chứa chất độc hại, phù hợp với trẻ nhỏ.</p>
+                </div>
+                <div class="commitment-card">
+                    <h3>Dịch vụ tận tâm</h3>
+                    <p>Đội ngũ hỗ trợ nhiệt tình, sẵn sàng giải đáp mọi thắc mắc và mang đến trải nghiệm tốt nhất.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mascot">
+            <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/mascot.png" alt="Mascot Morizoi">
+            <div class="mascot-text">
+                <h2>Gặp gỡ Mascot của Morizoi</h2>
+                <p>Đây là Thỏ Morizoi – người bạn đồng hành đáng yêu của các bé! Với sự vui tươi và sáng tạo, Thỏ Morizoi sẽ dẫn dắt các bé vào thế giới đồ chơi đầy màu sắc, nơi trí tưởng tượng được bay xa và mỗi ngày đều là một cuộc phiêu lưu thú vị.</p>
             </div>
         </section>
     </main>
@@ -915,6 +1116,17 @@
             document.getElementById(tabName).classList.add("active");
         }
 
+        function togglePasswordVisibility(inputId, iconElement) {
+            const input = document.getElementById(inputId);
+            if (input.type === "password") {
+                input.type = "text";
+                iconElement.textContent = "👓";
+            } else {
+                input.type = "password";
+                iconElement.textContent = "👁️";
+            }
+        }
+
         function register(event) {
             event.preventDefault();
             const identifier = document.getElementById("register-identifier").value;
@@ -934,11 +1146,15 @@
 
         function login(event) {
             event.preventDefault();
-            const identifier = document.getElementById("login-identifier").value;
-            const password = document.getElementById("login-password").value;
+            const identifier = document.getElementById("login-identifier").value.trim();
+            const password = document.getElementById("login-password").value.trim();
+            const normalizedIdentifier = identifier.includes('@') ? identifier.toLowerCase() : identifier;
 
             let users = JSON.parse(localStorage.getItem("users")) || [];
-            const user = users.find(user => user.identifier === identifier && user.password === password);
+            const user = users.find(user => {
+                const storedIdentifier = user.identifier.includes('@') ? user.identifier.toLowerCase() : user.identifier;
+                return storedIdentifier === normalizedIdentifier && user.password === password;
+            });
 
             if (user) {
                 closeModal();
