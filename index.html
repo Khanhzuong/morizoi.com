@@ -8,13 +8,22 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Thêm box-sizing toàn cục để tránh lỗi kích thước */
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden; /* Ngăn kéo ngang */
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #FFF3C3;
-            margin: 0;
-            padding: 0;
             position: relative;
-            overflow-x: hidden;
         }
 
         .background-blur {
@@ -36,6 +45,8 @@
             justify-content: space-between;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: relative;
+            width: 100%;
+            max-width: 100%;
         }
 
         .logo img {
@@ -289,11 +300,13 @@
             text-align: center;
             padding: 60px 20px;
             background: white;
-            margin: 20px;
+            margin: 20px auto; /* Căn giữa */
             border-radius: 20px;
             border: 3px solid #FFD1DC;
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
             animation: slideIn 1s ease-in-out;
+            width: 100%;
+            max-width: 100%;
         }
 
         @keyframes slideIn {
@@ -331,6 +344,8 @@
         .features {
             padding: 30px;
             text-align: center;
+            width: 100%;
+            max-width: 100%;
         }
 
         .features h2 {
@@ -347,6 +362,7 @@
             padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .feature-card {
@@ -382,6 +398,8 @@
             color: white;
             padding: 30px 20px;
             text-align: center;
+            width: 100%;
+            max-width: 100%;
         }
 
         .footer-content {
@@ -390,6 +408,7 @@
             flex-wrap: wrap;
             max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .footer-info, .footer-social {
@@ -494,6 +513,8 @@
             header {
                 flex-wrap: wrap;
                 padding: 10px;
+                width: 100%;
+                max-width: 100%;
             }
 
             .logo img {
@@ -553,6 +574,13 @@
                 font-size: 14px;
             }
 
+            .hero-section {
+                padding: 40px 15px;
+                margin: 15px;
+                width: 100%;
+                max-width: 100%;
+            }
+
             .hero-section h1 {
                 font-size: 28px;
             }
@@ -566,8 +594,19 @@
                 font-size: 16px;
             }
 
+            .features {
+                padding: 20px;
+                width: 100%;
+                max-width: 100%;
+            }
+
             .features h2 {
                 font-size: 24px;
+            }
+
+            .feature-grid {
+                padding: 15px;
+                width: 100%;
             }
 
             .feature-card h3 {
@@ -581,6 +620,7 @@
             .footer-content {
                 flex-direction: column;
                 text-align: center;
+                width: 100%;
             }
 
             .footer-info {
@@ -612,6 +652,11 @@
             .cart-badge {
                 font-size: 10px;
                 padding: 2px 5px;
+            }
+
+            .hero-section {
+                padding: 30px 10px;
+                margin: 10px;
             }
 
             .hero-section h1 {
