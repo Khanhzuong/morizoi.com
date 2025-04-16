@@ -4,17 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh mục sản phẩm - Morizoi</title>
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #FFF3C3;
-            margin: 0;
-            padding: 0;
             position: relative;
-            overflow-x: hidden;
         }
 
         .background-blur {
@@ -35,11 +42,19 @@
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            width: 100%;
+            max-width: 100%;
         }
 
         .logo img {
             height: 60px;
             margin: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
         }
 
         nav a {
@@ -53,6 +68,18 @@
 
         nav a:hover {
             color: #FFC107;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .nav-links {
+            display: flex;
         }
 
         .cart-icon {
@@ -203,6 +230,45 @@
             background-color: #2E7D32;
         }
 
+        .forgot-password {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .forgot-password a {
+            color: #2E7D32;
+            font-size: 14px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .forgot-password a:hover {
+            color: #F05B89;
+        }
+
+        .back-to-login {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .back-to-login a {
+            color: #2E7D32;
+            font-size: 14px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .back-to-login a:hover {
+            color: #F05B89;
+        }
+
+        .otp-display {
+            color: #F05B89;
+            font-size: 16px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
         .logout-content {
             text-align: center;
         }
@@ -228,111 +294,48 @@
             background-color: #2E7D32;
         }
 
-        /* Modal chọn số lượng */
-        .quantity-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .quantity-modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 400px;
-            max-width: 90%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        .quantity-modal-content h3 {
-            color: #2E7D32;
-            font-size: 20px;
-            margin: 0 0 10px;
-        }
-
-        .quantity-modal-content .price {
-            color: #F05B89;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .quantity-modal-content .price-old {
-            color: #999;
-            text-decoration: line-through;
-            font-size: 14px;
-            margin-left: 10px;
-        }
-
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .quantity-selector button {
-            background-color: #F05B89;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .quantity-selector button:hover {
-            background-color: #2E7D32;
-        }
-
-        .quantity-modal-content .confirm-btn {
-            background-color: #F05B89;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-
-        .quantity-modal-content .confirm-btn:hover {
-            background-color: #2E7D32;
-        }
-
-        /* Thanh tìm kiếm */
-        .search-bar {
+        .products-section {
+            padding: 30px;
             text-align: center;
-            margin: 20px 0;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .products-section h2 {
+            color: #2E7D32;
+            font-size: 32px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
 
         .search-bar input {
             padding: 10px;
             width: 300px;
-            max-width: 90%;
-            border: 2px solid #FFD1DC;
+            border: 1px solid #FFD1DC;
             border-radius: 5px;
             font-size: 16px;
-            font-family: 'Roboto', sans-serif;
         }
 
-        .products {
-            padding: 20px;
-            text-align: center;
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #F05B89;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
 
-        .products h2 {
-            color: #2E7D32;
-            font-size: 32px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+        .search-bar button:hover {
+            background-color: #2E7D32;
         }
 
         .product-grid {
@@ -342,6 +345,7 @@
             padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .product-card {
@@ -367,20 +371,18 @@
         }
 
         .product-card p {
-            color: #F05B89;
-            font-size: 16px;
-            font-weight: bold;
-            margin: 5px 0;
+            color: #555;
+            font-size: 14px;
+            margin: 0 0 10px;
         }
 
         .product-card .btn {
             display: inline-block;
-            padding: 8px 15px;
+            padding: 8px 16px;
             background-color: #F05B89;
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            margin-top: 10px;
             transition: background-color 0.3s;
         }
 
@@ -393,6 +395,8 @@
             color: white;
             padding: 30px 20px;
             text-align: center;
+            width: 100%;
+            max-width: 100%;
         }
 
         .footer-content {
@@ -401,6 +405,7 @@
             flex-wrap: wrap;
             max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .footer-info, .footer-social {
@@ -487,30 +492,66 @@
         }
 
         @media (max-width: 768px) {
-            nav {
+            .background-blur {
+                filter: blur(12px);
+            }
+
+            .background-blur::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.3);
+                z-index: -1;
+            }
+
+            header {
+                flex-wrap: wrap;
+                padding: 10px;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .logo img {
+                height: 50px;
+                margin: 0 10px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
                 flex-direction: column;
-                gap: 10px;
+                width: 100%;
+                background-color: #F05B89;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                padding: 10px 0;
+                z-index: 100;
             }
 
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
+            .nav-links.active {
+                display: flex;
             }
 
-            .footer-info {
-                text-align: center;
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-
-            .auth-btn {
+            .nav-links a {
+                margin: 10px 0;
                 font-size: 16px;
+                text-align: center;
             }
 
             .auth-section {
                 gap: 10px;
+                margin-right: 10px;
+            }
+
+            .auth-btn {
+                font-size: 16px;
             }
 
             .success-message {
@@ -527,6 +568,124 @@
             .tab {
                 flex: none;
                 width: 33.33%;
+                font-size: 14px;
+            }
+
+            .products-section {
+                padding: 20px;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .products-section h2 {
+                font-size: 24px;
+            }
+
+            .search-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .search-bar input {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .search-bar button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .product-grid {
+                padding: 15px;
+                width: 100%;
+            }
+
+            .product-card h3 {
+                font-size: 16px;
+            }
+
+            .product-card p {
+                font-size: 12px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+            }
+
+            .footer-info {
+                text-align: left;
+                padding-left: 15px;
+            }
+
+            .footer-info p.address {
+                white-space: normal;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                height: 40px;
+            }
+
+            .hamburger {
+                font-size: 20px;
+            }
+
+            .auth-btn {
+                font-size: 14px;
+            }
+
+            .cart-icon {
+                font-size: 20px;
+            }
+
+            .cart-badge {
+                font-size: 10px;
+                padding: 2px 5px;
+            }
+
+            .products-section h2 {
+                font-size: 20px;
+            }
+
+            .search-bar input {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .search-bar button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .product-card h3 {
+                font-size: 14px;
+            }
+
+            .product-card p {
+                font-size: 10px;
+            }
+
+            .product-card .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .contact-bubbles img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .footer-info {
+                padding-left: 10px;
             }
         }
     </style>
@@ -540,10 +699,13 @@
             </a>
         </div>
         <nav>
-            <a href="index.html">Trang chủ</a>
-            <a href="sanpham.html">Danh mục sản phẩm</a>
-            <a href="khuyenmai.html">Khuyến mãi</a>
-            <a href="lienhe.html">Liên hệ</a>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html">Trang chủ</a>
+                <a href="sanpham.html">Danh mục sản phẩm</a>
+                <a href="khuyenmai.html">Khuyến mãi</a>
+                <a href="lienhe.html">Liên hệ</a>
+            </div>
         </nav>
         <div class="auth-section">
             <a href="#" class="auth-btn" onclick="openModal()">Đăng nhập/Đăng ký</a>
@@ -557,13 +719,13 @@
         </div>
     </header>
 
-    <!-- Modal đăng nhập/đăng ký/đăng xuất -->
     <div class="modal" id="auth-modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">×</span>
             <div class="tabs">
                 <div class="tab active" onclick="showTab('login')">Đăng nhập</div>
                 <div class="tab" onclick="showTab('register')">Đăng ký</div>
+                <div class="tab" id="forgot-password-tab" onclick="showTab('forgot-password')">Khôi phục mật khẩu</div>
                 <div class="tab" id="logout-tab" style="display: none;" onclick="showTab('logout')">Đăng xuất</div>
             </div>
             <div class="tab-content active" id="login">
@@ -572,6 +734,9 @@
                     <input type="text" id="login-identifier" required>
                     <label for="login-password">Mật khẩu:</label>
                     <input type="password" id="login-password" required>
+                    <div class="forgot-password">
+                        <a onclick="showTab('forgot-password')">Quên mật khẩu?</a>
+                    </div>
                     <button type="submit">Đăng nhập</button>
                 </form>
             </div>
@@ -584,6 +749,39 @@
                     <button type="submit">Đăng ký</button>
                 </form>
             </div>
+            <div class="tab-content" id="forgot-password">
+                <form class="auth-form" onsubmit="requestPasswordReset(event)">
+                    <label for="forgot-identifier">Email hoặc Số điện thoại:</label>
+                    <input type="text" id="forgot-identifier" required>
+                    <button type="submit">Gửi yêu cầu khôi phục</button>
+                </form>
+                <div class="back-to-login">
+                    <a onclick="showTab('login')">Quay lại đăng nhập</a>
+                </div>
+            </div>
+            <div class="tab-content" id="verify-otp">
+                <form class="auth-form" onsubmit="verifyOTP(event)">
+                    <label for="otp-code">Nhập mã OTP:</label>
+                    <input type="text" id="otp-code" required>
+                    <div class="otp-display" id="otp-display"></div>
+                    <button type="submit">Xác nhận OTP</button>
+                </form>
+                <div class="back-to-login">
+                    <a onclick="showTab('login')">Quay lại đăng nhập</a>
+                </div>
+            </div>
+            <div class="tab-content" id="reset-password">
+                <form class="auth-form" onsubmit="resetPassword(event)">
+                    <label for="new-password">Mật khẩu mới:</label>
+                    <input type="password" id="new-password" required>
+                    <label for="confirm-password">Xác nhận mật khẩu mới:</label>
+                    <input type="password" id="confirm-password" required>
+                    <button type="submit">Cập nhật mật khẩu</button>
+                </form>
+                <div class="back-to-login">
+                    <a onclick="showTab('login')">Quay lại đăng nhập</a>
+                </div>
+            </div>
             <div class="tab-content" id="logout">
                 <div class="logout-content">
                     <p>Bạn có muốn đăng xuất khỏi tài khoản?</p>
@@ -593,117 +791,67 @@
         </div>
     </div>
 
-    <!-- Modal chọn số lượng -->
-    <div class="quantity-modal" id="quantity-modal">
-        <div class="quantity-modal-content">
-            <span class="close-btn" onclick="closeQuantityModal()">×</span>
-            <h3 id="quantity-modal-title"></h3>
-            <p><span class="price" id="quantity-modal-price"></span> <span class="price-old" id="quantity-modal-price-old"></span></p>
-            <div class="quantity-selector">
-                <button onclick="changeQuantity(-1)">-</button>
-                <span id="quantity-value">1</span>
-                <button onclick="changeQuantity(1)">+</button>
-            </div>
-            <button class="confirm-btn" onclick="confirmAddToCart()">Thêm vào giỏ hàng</button>
-        </div>
-    </div>
-
     <main>
-        <section class="products">
+        <section class="products-section">
             <h2>Danh mục sản phẩm</h2>
             <div class="search-bar">
                 <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm..." onkeyup="searchProducts()">
+                <button onclick="searchProducts()">Tìm kiếm</button>
             </div>
             <div class="product-grid" id="product-grid">
-                <div class="product-card" data-name="Nhà thỏ Morizoi">
+                <div class="product-card">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 1">
                     <h3>Nhà thỏ Morizoi</h3>
-                    <p>500,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Nhà thỏ Morizoi', 500000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                    <p>Đồ chơi mô hình nhà thỏ dễ thương, giúp bé phát triển trí tưởng tượng.</p>
+                    <a href="#" class="btn" onclick="addToCart('Nhà thỏ Morizoi', 1)">Thêm vào giỏ hàng</a>
                 </div>
-                <div class="product-card" data-name="Gia đình gấu Morizoi">
+                <div class="product-card">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 2">
                     <h3>Gia đình gấu Morizoi</h3>
-                    <p>750,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Gia đình gấu Morizoi', 750000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                    <p>Bộ đồ chơi gia đình gấu, phù hợp cho bé từ 3 tuổi trở lên.</p>
+                    <a href="#" class="btn" onclick="addToCart('Gia đình gấu Morizoi', 1)">Thêm vào giỏ hàng</a>
                 </div>
-                <div class="product-card" data-name="Combo gia đình Morizoi">
+                <div class="product-card">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 3">
                     <h3>Combo gia đình Morizoi</h3>
-                    <p>900,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Combo gia đình Morizoi', 900000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                    <p>Combo đồ chơi đầy đủ, giúp bé sáng tạo câu chuyện của riêng mình.</p>
+                    <a href="#" class="btn" onclick="addToCart('Combo gia đình Morizoi', 1)">Thêm vào giỏ hàng</a>
                 </div>
-                <div class="product-card" data-name="Nhà cây Morizoi">
+                <div class="product-card">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 4">
-                    <h3>Nhà cây Morizoi</h3>
-                    <p>600,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Nhà cây Morizoi', 600000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                    <h3>Nhà mèo Morizoi</h3>
+                    <p>Đồ chơi mô hình nhà mèo, kích thích sự sáng tạo của bé.</p>
+                    <a href="#" class="btn" onclick="addToCart('Nhà mèo Morizoi', 1)">Thêm vào giỏ hàng</a>
                 </div>
-                <div class="product-card" data-name="Gia đình mèo Morizoi">
+                <div class="product-card">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 5">
                     <h3>Gia đình mèo Morizoi</h3>
-                    <p>800,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Gia đình mèo Morizoi', 800000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                    <p>Bộ đồ chơi gia đình mèo, an toàn cho bé từ 3 tuổi.</p>
+                    <a href="#" class="btn" onclick="addToCart('Gia đình mèo Morizoi', 1)">Thêm vào giỏ hàng</a>
                 </div>
-                <div class="product-card" data-name="Combo nhà và xe Morizoi">
+                <div class="product-card">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 6">
-                    <h3>Combo nhà và xe Morizoi</h3>
-                    <p>1,200,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Combo nhà và xe Morizoi', 1200000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                    <h3>Combo nhà thỏ và gấu</h3>
+                    <p>Combo đồ chơi nhà thỏ và gấu, giúp bé phát triển kỹ năng kể chuyện.</p>
+                    <a href="#" class="btn" onclick="addToCart('Combo nhà thỏ và gấu', 1)">Thêm vào giỏ hàng</a>
                 </div>
-                <div class="product-card" data-name="Nhà chim Morizoi">
+                <div class="product-card">
                     <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 7">
-                    <h3>Nhà chim Morizoi</h3>
-                    <p>550,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Nhà chim Morizoi', 550000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
-                </div>
-                <div class="product-card" data-name="Gia đình chó Morizoi">
-                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 8">
-                    <h3>Gia đình chó Morizoi</h3>
-                    <p>780,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Gia đình chó Morizoi', 780000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
-                </div>
-                <div class="product-card" data-name="Combo nhà và vườn Morizoi">
-                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 9">
-                    <h3>Combo nhà và vườn Morizoi</h3>
-                    <p>950,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Combo nhà và vườn Morizoi', 950000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
-                </div>
-                <div class="product-card" data-name="Nhà sóc Morizoi">
-                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 10">
                     <h3>Nhà sóc Morizoi</h3>
-                    <p>620,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Nhà sóc Morizoi', 620000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                    <p>Đồ chơi mô hình nhà sóc, thiết kế dễ thương và an toàn.</p>
+                    <a href="#" class="btn" onclick="addToCart('Nhà sóc Morizoi', 1)">Thêm vào giỏ hàng</a>
                 </div>
-                <div class="product-card" data-name="Gia đình cáo Morizoi">
-                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 11">
-                    <h3>Gia đình cáo Morizoi</h3>
-                    <p>820,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Gia đình cáo Morizoi', 820000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 8">
+                    <h3>Gia đình sóc Morizoi</h3>
+                    <p>Bộ đồ chơi gia đình sóc, giúp bé học cách chăm sóc gia đình.</p>
+                    <a href="#" class="btn" onclick="addToCart('Gia đình sóc Morizoi', 1)">Thêm vào giỏ hàng</a>
                 </div>
-                <div class="product-card" data-name="Combo nhà và hồ Morizoi">
-                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 12">
-                    <h3>Combo nhà và hồ Morizoi</h3>
-                    <p>1,300,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Combo nhà và hồ Morizoi', 1300000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
-                </div>
-                <div class="product-card" data-name="Nhà hươu Morizoi">
-                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 13">
-                    <h3>Nhà hươu Morizoi</h3>
-                    <p>580,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Nhà hươu Morizoi', 580000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
-                </div>
-                <div class="product-card" data-name="Gia đình sư tử Morizoi">
-                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 14">
-                    <h3>Gia đình sư tử Morizoi</h3>
-                    <p>850,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Gia đình sư tử Morizoi', 850000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
-                </div>
-                <div class="product-card" data-name="Combo nhà và sân chơi Morizoi">
-                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 15">
-                    <h3>Combo nhà và sân chơi Morizoi</h3>
-                    <p>1,400,000 VNĐ</p>
-                    <a href="#" class="btn" onclick="openQuantityModal('Combo nhà và sân chơi Morizoi', 1400000, null, 'https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png')">Mua hàng</a>
+                <div class="product-card">
+                    <img src="https://raw.githubusercontent.com/Khanhzuong/morizoi.com/refs/heads/main/Asset%201.png" alt="Sản phẩm 9">
+                    <h3>Combo nhà mèo và sóc</h3>
+                    <p>Combo đồ chơi nhà mèo và sóc, khuyến khích bé sáng tạo.</p>
+                    <a href="#" class="btn" onclick="addToCart('Combo nhà mèo và sóc', 1)">Thêm vào giỏ hàng</a>
                 </div>
             </div>
         </section>
@@ -745,8 +893,13 @@
     </div>
 
     <script>
-        let currentProduct = {};
-        let quantity = 1;
+        let currentIdentifier = '';
+        let currentOTP = '';
+
+        function toggleMenu() {
+            const navLinks = document.getElementById("nav-links");
+            navLinks.classList.toggle("active");
+        }
 
         function showSuccessMessage(message) {
             const successMessage = document.getElementById("success-message");
@@ -772,6 +925,11 @@
         function closeModal() {
             document.getElementById("auth-modal").style.display = "none";
             showTab("login");
+            document.getElementById("forgot-identifier").value = "";
+            document.getElementById("otp-code").value = "";
+            document.getElementById("new-password").value = "";
+            document.getElementById("confirm-password").value = "";
+            document.getElementById("otp-display").innerText = "";
         }
 
         function showTab(tabName) {
@@ -816,6 +974,63 @@
             }
         }
 
+        function requestPasswordReset(event) {
+            event.preventDefault();
+            const identifier = document.getElementById("forgot-identifier").value;
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            const user = users.find(user => user.identifier === identifier);
+
+            if (!user) {
+                alert("Email hoặc số điện thoại không tồn tại. Vui lòng thử lại.");
+                return;
+            }
+
+            currentIdentifier = identifier;
+            const isEmail = identifier.includes('@');
+
+            if (isEmail) {
+                showSuccessMessage("Một liên kết khôi phục đã được gửi đến email của bạn!");
+                showTab("reset-password");
+            } else {
+                currentOTP = Math.floor(100000 + Math.random() * 900000).toString();
+                document.getElementById("otp-display").innerText = `Mã OTP của bạn: ${currentOTP}`;
+                showTab("verify-otp");
+            }
+        }
+
+        function verifyOTP(event) {
+            event.preventDefault();
+            const otp = document.getElementById("otp-code").value;
+
+            if (otp === currentOTP) {
+                showTab("reset-password");
+            } else {
+                alert("Mã OTP không đúng. Vui lòng thử lại.");
+            }
+        }
+
+        function resetPassword(event) {
+            event.preventDefault();
+            const newPassword = document.getElementById("new-password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+
+            if (newPassword !== confirmPassword) {
+                alert("Mật khẩu không khớp. Vui lòng thử lại.");
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            const userIndex = users.findIndex(user => user.identifier === currentIdentifier);
+            if (userIndex !== -1) {
+                users[userIndex].password = newPassword;
+                localStorage.setItem("users", JSON.stringify(users));
+                showSuccessMessage("Mật khẩu đã được cập nhật thành công!");
+                showTab("login");
+            } else {
+                alert("Đã có lỗi xảy ra. Vui lòng thử lại.");
+            }
+        }
+
         function logout() {
             localStorage.removeItem("loggedInUser");
             document.querySelector(".auth-btn").innerText = "Đăng nhập/Đăng ký";
@@ -828,10 +1043,6 @@
             return JSON.parse(localStorage.getItem("cart")) || [];
         }
 
-        function saveCart(cart) {
-            localStorage.setItem("cart", JSON.stringify(cart));
-        }
-
         function getCartCount() {
             let cart = getCart();
             return cart.reduce((total, item) => total + item.quantity, 0);
@@ -841,49 +1052,26 @@
             document.getElementById("cart-count").innerText = getCartCount();
         }
 
-        function openQuantityModal(name, price, priceOld, image) {
-            currentProduct = { name, price, priceOld, image };
-            quantity = 1;
-
-            document.getElementById("quantity-modal-title").innerText = name;
-            document.getElementById("quantity-modal-price").innerText = `${price.toLocaleString()} VNĐ`;
-            document.getElementById("quantity-modal-price-old").innerText = priceOld ? `${priceOld.toLocaleString()} VNĐ` : '';
-            document.getElementById("quantity-value").innerText = quantity;
-            document.getElementById("quantity-modal").style.display = "flex";
-        }
-
-        function closeQuantityModal() {
-            document.getElementById("quantity-modal").style.display = "none";
-        }
-
-        function changeQuantity(delta) {
-            quantity = Math.max(1, quantity + delta);
-            document.getElementById("quantity-value").innerText = quantity;
-        }
-
-        function confirmAddToCart() {
+        function addToCart(productName, quantity) {
             let cart = getCart();
-            let existingItem = cart.find(item => item.name === currentProduct.name);
-
+            const existingItem = cart.find(item => item.name === productName);
             if (existingItem) {
                 existingItem.quantity += quantity;
             } else {
-                cart.push({ name: currentProduct.name, price: currentProduct.price, image: currentProduct.image, quantity: quantity, selected: false });
+                cart.push({ name: productName, quantity });
             }
-
-            saveCart(cart);
+            localStorage.setItem("cart", JSON.stringify(cart));
             updateCartCount();
-            showSuccessMessage(`${currentProduct.name} đã được thêm vào giỏ hàng!`);
-            closeQuantityModal();
+            showSuccessMessage(`${productName} đã được thêm vào giỏ hàng!`);
         }
 
         function searchProducts() {
-            const searchInput = document.getElementById("search-input").value.toLowerCase();
+            const input = document.getElementById("search-input").value.toLowerCase();
             const productCards = document.querySelectorAll(".product-card");
 
             productCards.forEach(card => {
-                const productName = card.getAttribute("data-name").toLowerCase();
-                if (productName.includes(searchInput)) {
+                const productName = card.querySelector("h3").innerText.toLowerCase();
+                if (productName.includes(input)) {
                     card.style.display = "block";
                 } else {
                     card.style.display = "none";
