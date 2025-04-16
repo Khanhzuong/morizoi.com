@@ -180,7 +180,9 @@
             text-align: center;
             padding: 10px;
             cursor: pointer;
-            color: #2E7D32;
+            color: #
+
+2E7D32;
             font-weight: bold;
             transition: background-color 0.3s;
         }
@@ -932,7 +934,7 @@
 
         function login(event) {
             event.preventDefault();
-            const identifier = document.getElement???
+            const identifier = document.getElementById("login-identifier").value;
             const password = document.getElementById("login-password").value;
 
             let users = JSON.parse(localStorage.getItem("users")) || [];
