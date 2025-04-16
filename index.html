@@ -624,7 +624,12 @@
             }
 
             .footer-info {
-                text-align: center;
+                text-align: left; /* Căn lề trái trên điện thoại */
+                padding-left: 15px; /* Thêm khoảng cách từ lề trái */
+            }
+
+            .footer-info p.address {
+                white-space: normal; /* Cho phép xuống dòng để dễ đọc */
             }
 
             .social-links {
@@ -687,6 +692,10 @@
             .contact-bubbles img {
                 width: 40px;
                 height: 40px;
+            }
+
+            .footer-info {
+                padding-left: 10px;
             }
         }
     </style>
@@ -923,7 +932,7 @@
 
         function login(event) {
             event.preventDefault();
-            const identifier = document.getElementById("login-identifier").value;
+            const identifier = document.getElement???
             const password = document.getElementById("login-password").value;
 
             let users = JSON.parse(localStorage.getItem("users")) || [];
